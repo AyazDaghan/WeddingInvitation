@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Ahmet & Gönül - Düğün Davetiyesi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --cream-dark: #EDE7D9;
+    --gold: #C9A84C;
+    --gold-dark: #A07830;
+    --gold-light: #E8D5A3;
+    --text-dark: #2C2416;
+    --text-mid: #5C4A2A;
+    --text-light: #8B7355;
+    --pink: #E8A0A0;
+    --pink-light: #F5D5D5;
+    --green: #7A9E7E;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Lato', sans-serif;
+    color: var(--text-dark);
+    max-width: 480px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* ── LANDING PAGE ── */
+  #landing {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    position: relative;
+    padding: 40px 20px;
+    cursor: pointer;
+  }
+
+  .envelope-wrap {
+    position: relative;
+    width: 280px;
+    height: 220px;
+    margin-bottom: 40px;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.15));
+    transition: transform 0.3s ease;
+  }
+
+  #landing:hover .envelope-wrap {
+    transform: translateY(-4px);
+  }
+
+  .envelope-svg { width: 100%; height: 100%; }
+
+  .tap-hint {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: #1a1408;
+    text-align: center;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  /* ── ENVELOPE OPEN ANIMATION ── */
+  #envelope-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--cream);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  #envelope-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .env-anim-wrap {
+    position: relative;
+    width: 300px;
+    height: 220px;
+  }
+
+  /* ── MAIN INVITATION ── */
+  #invitation {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  #invitation.visible {
+    display: block;
+    opacity: 1;
+  }
+
+  /* ── HERO SECTION ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    overflow: hidden;
+    background: var(--cream);
+  }
+
+  .floral-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 220px;
+    pointer-events: none;
+  }
+
+  .floral-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 220px;
+    pointer-events: none;
+    transform: scaleY(-1);
+  }
+
+  .floral-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    pointer-events: none;
+  }
+
+  .floral-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    pointer-events: none;
+    transform: scaleX(-1);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 180px 70px 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .names-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .name-main {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 68px;
+    font-weight: 400;
+    color: var(--text-dark);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .ampersand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    color: var(--text-mid);
+    margin: 4px 0;
+    font-weight: 300;
+  }
+
+  .music-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 24px 0;
+    color: var(--text-mid);
+  }
+
+  .music-line {
+    width: 40px;
+    height: 1px;
+    background: var(--text-mid);
+  }
+
+  .music-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-mid);
+  }
+
+  .play-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--text-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.2s;
+  }
+
+  .play-btn:hover {
+    background: var(--text-mid);
+    color: white;
+  }
+
+  .play-btn svg { width: 14px; height: 14px; }
+
+  .invitation-text {
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    text-align: center;
+    margin: 8px 0 20px;
+    line-height: 1.8;
+  }
+
+  .family-names {
+    display: flex;
+    gap: 0;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .family-col {
+    text-align: center;
+    flex: 1;
+  }
+
+  .family-divider {
+    width: 1px;
+    background: var(--text-light);
+    margin: 0 12px;
+    opacity: 0.4;
+    align-self: stretch;
+  }
+
+  .family-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: var(--text-mid);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+  }
+
+  /* ── SECTION BASE ── */
+  .section {
+    position: relative;
+    padding: 60px 30px;
+    background: var(--cream);
+    overflow: hidden;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 46px;
+    font-weight: 400;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── PROGRAM SECTION ── */
+  .program-section {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .program-timeline {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .timeline-center {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold-light) 10%, var(--gold-light) 90%, transparent);
+    transform: translateX(-50%);
+  }
+
+  .timeline-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .timeline-item:last-child { margin-bottom: 0; }
+
+  .timeline-item.left {
+    flex-direction: row;
+    text-align: right;
+  }
+
+  .timeline-item.right {
+    flex-direction: row-reverse;
+    text-align: left;
+  }
+
+  .tl-content {
+    flex: 1;
+    padding: 0 20px;
+  }
+
+  .tl-time {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+  }
+
+  .tl-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-top: 2px;
+    letter-spacing: 0.01em;
+  }
+
+  .tl-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid var(--gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 2;
+    font-size: 20px;
+  }
+
+  /* ── DETAILS SECTION ── */
+  .details-section {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .detail-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 36px;
+  }
+
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .detail-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .detail-icon svg {
+    width: 36px;
+    height: 36px;
+    stroke: var(--text-mid);
+    fill: none;
+    stroke-width: 1.2;
+  }
+
+  .detail-text {
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dark);
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .map-container {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--gold-light);
+    margin-top: 8px;
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 200px;
+    border: none;
+    display: block;
+  }
+
+  .map-link {
+    display: block;
+    text-align: center;
+    margin-top: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-mid);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gold-light);
+    width: fit-content;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .map-link:hover { color: var(--gold-dark); }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 40px 30px;
+    text-align: center;
+    background: var(--cream-dark);
+  }
+
+  .footer-monogram {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 42px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .footer-text {
+    font-family: 'Lato', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  /* ── WISTERIA/FLOWER DECORATIONS ── */
+  .section-flowers-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  .section-flowers-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    pointer-events: none;
+    opacity: 0.7;
+    transform: scaleY(-1);
+  }
+
+  .divider-gold {
+    width: 80px;
+    height: 1px;
+    background: var(--gold-light);
+    margin: 20px auto;
+  }
+
+  .gold-dot-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0;
+  }
+
+  .gold-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .gold-dot.large {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in {
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .delay-1 { animation-delay: 0.2s; opacity: 0; }
+  .delay-2 { animation-delay: 0.4s; opacity: 0; }
+  .delay-3 { animation-delay: 0.6s; opacity: 0; }
+  .delay-4 { animation-delay: 0.8s; opacity: 0; }
+</style>
+</head>
+<body>
+
+<!-- LANDING PAGE -->
+<div id="landing" onclick="openEnvelope()">
+  <div class="envelope-wrap">
+    <svg class="envelope-svg" viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="envGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#F8F4EC"/>
+          <stop offset="100%" style="stop-color:#EDE7D9"/>
+        </linearGradient>
+        <!-- Wax seal radial gradient: dark outer rim, bright center highlight -->
+        <radialGradient id="sealGrad" cx="42%" cy="38%" r="58%" fx="42%" fy="38%">
+          <stop offset="0%"   style="stop-color:#F0D87A"/>
+          <stop offset="25%"  style="stop-color:#D4A040"/>
+          <stop offset="55%"  style="stop-color:#B07820"/>
+          <stop offset="80%"  style="stop-color:#8C5C10"/>
+          <stop offset="100%" style="stop-color:#6A4008"/>
+        </radialGradient>
+        <!-- Inner face lighter -->
+        <radialGradient id="sealFace" cx="44%" cy="40%" r="50%" fx="44%" fy="40%">
+          <stop offset="0%"   style="stop-color:#E8C860"/>
+          <stop offset="40%"  style="stop-color:#C49030"/>
+          <stop offset="100%" style="stop-color:#9A6818"/>
+        </radialGradient>
+        <filter id="sealShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#6A4008" flood-opacity="0.35"/>
+        </filter>
+      </defs>
+
+      <!-- Envelope body (plain cream front face) -->
+      <rect x="4" y="30" width="272" height="180" rx="4" fill="url(#envGrad)" stroke="#D4C4A0" stroke-width="1"/>
+
+      <!-- Only top-left and top-right fold lines (V shape pointing down to center) -->
+      <line x1="4" y1="30" x2="140" y2="115" stroke="#C8B890" stroke-width="0.8" opacity="0.7"/>
+      <line x1="276" y1="30" x2="140" y2="115" stroke="#C8B890" stroke-width="0.8" opacity="0.7"/>
+
+      <!-- WAX SEAL: irregular blob shape (like photo) -->
+      <g filter="url(#sealShadow)">
+        <!-- Outer rough blob — bumpy wax edge -->
+        <path d="
+          M140 88
+          C150 84, 162 84, 170 90
+          C178 94, 182 100, 184 108
+          C187 116, 186 124, 183 131
+          C179 139, 172 144, 165 148
+          C158 152, 150 154, 142 154
+          C134 154, 126 153, 118 149
+          C110 145, 103 139, 99 131
+          C95 124, 94 115, 96 107
+          C98 99, 103 93, 110 89
+          C118 84, 130 92, 140 88Z
+        " fill="url(#sealGrad)"/>
+        <!-- Inner face circle, slightly smaller and offset for depth -->
+        <circle cx="140" cy="120" r="30" fill="url(#sealFace)"/>
+        <!-- Embossed ring inside -->
+        <circle cx="140" cy="120" r="27" fill="none" stroke="#F0D870" stroke-width="0.8" opacity="0.5"/>
+        <circle cx="140" cy="120" r="23" fill="none" stroke="#C49030" stroke-width="0.5" opacity="0.4"/>
+        <!-- Press-mark texture lines on outer wax -->
+        <path d="M122 92 Q128 96 126 100" stroke="#C49030" stroke-width="0.6" fill="none" opacity="0.5"/>
+        <path d="M158 89 Q162 94 160 98" stroke="#C49030" stroke-width="0.6" fill="none" opacity="0.5"/>
+        <path d="M178 112 Q180 118 177 122" stroke="#9A6818" stroke-width="0.6" fill="none" opacity="0.4"/>
+        <path d="M98 112 Q97 118 100 123" stroke="#9A6818" stroke-width="0.6" fill="none" opacity="0.4"/>
+        <path d="M130 150 Q136 153 142 151" stroke="#9A6818" stroke-width="0.6" fill="none" opacity="0.4"/>
+        <!-- Light highlight on top-left of seal -->
+        <ellipse cx="127" cy="103" rx="9" ry="6" fill="#F5E0A0" opacity="0.25" transform="rotate(-25,127,103)"/>
+      </g>
+
+      <!-- Monogram "AG" in script style inside seal -->
+      <text x="134" y="126"
+        text-anchor="middle"
+        font-family="Playfair Display, serif"
+        font-style="italic"
+        font-size="26"
+        font-weight="400"
+        fill="#F8F0D8"
+        letter-spacing="-1">AG</text>
+      <!-- Subtle shadow for depth on letters -->
+      <text x="135" y="127"
+        text-anchor="middle"
+        font-family="Playfair Display, serif"
+        font-style="italic"
+        font-size="26"
+        font-weight="400"
+        fill="#6A4008"
+        opacity="0.25"
+        letter-spacing="-1">AG</text>
+    </svg>
+  </div>
+
+  <p class="tap-hint">Davetiyemizi açmak için<br>lütfen tıklayınız</p>
+</div>
+
+<!-- ENVELOPE ANIMATION OVERLAY -->
+<div id="envelope-overlay">
+  <div class="env-anim-wrap" id="envAnim">
+    <svg id="envSvg" viewBox="0 0 300 240" width="300" height="240" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="eg2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#F8F4EC"/>
+          <stop offset="100%" style="stop-color:#EDE7D9"/>
+        </linearGradient>
+        <radialGradient id="sg2" cx="42%" cy="38%" r="58%" fx="42%" fy="38%">
+          <stop offset="0%"   style="stop-color:#F0D87A"/>
+          <stop offset="25%"  style="stop-color:#D4A040"/>
+          <stop offset="55%"  style="stop-color:#B07820"/>
+          <stop offset="80%"  style="stop-color:#8C5C10"/>
+          <stop offset="100%" style="stop-color:#6A4008"/>
+        </radialGradient>
+        <radialGradient id="sf2" cx="44%" cy="40%" r="50%" fx="44%" fy="40%">
+          <stop offset="0%"   style="stop-color:#E8C860"/>
+          <stop offset="40%"  style="stop-color:#C49030"/>
+          <stop offset="100%" style="stop-color:#9A6818"/>
+        </radialGradient>
+        <filter id="ss2" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#6A4008" flood-opacity="0.35"/>
+        </filter>
+      </defs>
+      <!-- Envelope body -->
+      <rect x="10" y="60" width="280" height="170" rx="4" fill="url(#eg2)" stroke="#D4C4A0" stroke-width="1"/>
+      <!-- Top V lines only -->
+      <line x1="10" y1="60" x2="150" y2="138" stroke="#C8B890" stroke-width="0.8" opacity="0.7"/>
+      <line x1="290" y1="60" x2="150" y2="138" stroke="#C8B890" stroke-width="0.8" opacity="0.7"/>
+      <!-- Flap (animated) -->
+      <g id="envFlap" style="transform-origin: 150px 60px; transform: rotateX(0deg)">
+        <path id="flapPath" d="M10 60 L150 145 L290 60 L290 10 Q150 90 10 10 Z" fill="#E8E4DA" stroke="#D4C4A0" stroke-width="0.5"/>
+      </g>
+      <!-- Wax Seal -->
+      <g id="envSeal" filter="url(#ss2)">
+        <path d="
+          M150 102
+          C160 98, 172 98, 180 104
+          C188 108, 192 115, 194 123
+          C197 131, 196 140, 193 147
+          C189 155, 182 160, 175 164
+          C168 168, 160 170, 152 170
+          C144 170, 136 169, 128 165
+          C120 161, 113 155, 109 147
+          C105 140, 104 131, 106 123
+          C108 115, 113 108, 120 104
+          C128 99, 140 107, 150 102Z
+        " fill="url(#sg2)"/>
+        <circle cx="150" cy="136" r="30" fill="url(#sf2)"/>
+        <circle cx="150" cy="136" r="27" fill="none" stroke="#F0D870" stroke-width="0.8" opacity="0.5"/>
+        <ellipse cx="137" cy="119" rx="9" ry="6" fill="#F5E0A0" opacity="0.22" transform="rotate(-25,137,119)"/>
+      </g>
+      <text x="144" y="143"
+        text-anchor="middle"
+        font-family="Playfair Display, serif"
+        font-style="italic"
+        font-size="26"
+        font-weight="400"
+        fill="#F8F0D8"
+        letter-spacing="-1">AG</text>
+    </svg>
+  </div>
+</div>
+
+<!-- MAIN INVITATION (hidden until opened) -->
+<div id="invitation">
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <!-- Floral pillars left & right -->
+    <svg class="floral-left" viewBox="0 0 60 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- Pillar -->
+      <rect x="20" y="0" width="20" height="800" fill="#E8E3D8" rx="2"/>
+      <rect x="22" y="0" width="16" height="800" fill="#F0EBE0"/>
+      <!-- Column base decorations -->
+      <rect x="15" y="720" width="30" height="8" fill="#E0D8C8" rx="2"/>
+      <rect x="12" y="728" width="36" height="6" fill="#D8D0C0" rx="2"/>
+      <!-- Flowers scattered -->
+      <ellipse cx="30" cy="80" rx="12" ry="8" fill="#E8A0A0" opacity="0.8"/>
+      <ellipse cx="30" cy="80" rx="8" ry="5" fill="#F0B8B8"/>
+      <circle cx="30" cy="80" r="3" fill="#C98080"/>
+      <ellipse cx="15" cy="140" rx="9" ry="6" fill="#D4849E" opacity="0.7"/>
+      <circle cx="15" cy="140" r="2.5" fill="#B06070"/>
+      <ellipse cx="45" cy="200" rx="10" ry="7" fill="#E8A0A0" opacity="0.8"/>
+      <circle cx="45" cy="200" r="3" fill="#C98080"/>
+      <!-- Green leaves -->
+      <path d="M5 100 Q20 90 15 110 Q0 120 5 100" fill="#7A9E7E" opacity="0.6"/>
+      <path d="M50 160 Q65 150 60 170 Q45 180 50 160" fill="#6B8F6E" opacity="0.5"/>
+      <path d="M10 220 Q25 210 20 230 Q5 240 10 220" fill="#7A9E7E" opacity="0.6"/>
+      <!-- More flowers -->
+      <ellipse cx="25" cy="300" rx="11" ry="7" fill="#F0C8D0" opacity="0.7"/>
+      <circle cx="25" cy="300" r="3" fill="#C89090"/>
+      <ellipse cx="50" cy="360" rx="9" ry="6" fill="#E8A0A0" opacity="0.8"/>
+      <path d="M0 280 Q15 270 10 290 Q-5 300 0 280" fill="#7A9E7E" opacity="0.5"/>
+      <!-- Wisteria hanging -->
+      <path d="M30 0 Q28 30 26 60 Q24 90 28 120" stroke="#A8C8A0" stroke-width="1.5" fill="none" opacity="0.7"/>
+      <circle cx="26" cy="65" r="4" fill="#C8A0C0" opacity="0.7"/>
+      <circle cx="28" cy="80" r="3" fill="#D0B0C8" opacity="0.6"/>
+      <circle cx="25" cy="95" r="4" fill="#C8A0C0" opacity="0.7"/>
+      <circle cx="27" cy="110" r="3" fill="#D0B0C8" opacity="0.6"/>
+      <circle cx="30" cy="40" r="4" fill="#D4A0BC" opacity="0.7"/>
+    </svg>
+
+    <svg class="floral-right" viewBox="0 0 60 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- Pillar -->
+      <rect x="20" y="0" width="20" height="800" fill="#E8E3D8" rx="2"/>
+      <rect x="22" y="0" width="16" height="800" fill="#F0EBE0"/>
+      <rect x="15" y="720" width="30" height="8" fill="#E0D8C8" rx="2"/>
+      <rect x="12" y="728" width="36" height="6" fill="#D8D0C0" rx="2"/>
+      <ellipse cx="30" cy="100" rx="12" ry="8" fill="#E8A0A0" opacity="0.8"/>
+      <circle cx="30" cy="100" r="3" fill="#C98080"/>
+      <ellipse cx="15" cy="180" rx="9" ry="6" fill="#D4849E" opacity="0.7"/>
+      <circle cx="15" cy="180" r="2.5" fill="#B06070"/>
+      <ellipse cx="48" cy="240" rx="10" ry="7" fill="#F0C8D0" opacity="0.7"/>
+      <path d="M55 120 Q40 110 45 130 Q60 140 55 120" fill="#7A9E7E" opacity="0.6"/>
+      <path d="M5 200 Q20 190 15 210 Q0 220 5 200" fill="#6B8F6E" opacity="0.5"/>
+      <ellipse cx="35" cy="320" rx="11" ry="7" fill="#E8A0A0" opacity="0.8"/>
+      <circle cx="35" cy="320" r="3" fill="#C98080"/>
+      <path d="M30 0 Q32 30 34 60 Q36 90 32 120" stroke="#A8C8A0" stroke-width="1.5" fill="none" opacity="0.7"/>
+      <circle cx="34" cy="65" r="4" fill="#C8A0C0" opacity="0.7"/>
+      <circle cx="32" cy="80" r="3" fill="#D0B0C8" opacity="0.6"/>
+      <circle cx="35" cy="95" r="4" fill="#C8A0C0" opacity="0.7"/>
+      <circle cx="33" cy="110" r="3" fill="#D0B0C8" opacity="0.6"/>
+      <circle cx="30" cy="40" r="4" fill="#D4A0BC" opacity="0.7"/>
+    </svg>
+
+    <!-- Top floral garland -->
+    <svg class="floral-top" viewBox="0 0 480 220" preserveAspectRatio="xMidYTop slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- Green vines -->
+      <path d="M0 0 Q120 60 240 80 Q360 60 480 0" stroke="#A8C8A0" stroke-width="2" fill="none" opacity="0.5"/>
+      <path d="M0 0 Q120 80 240 100 Q360 80 480 0" stroke="#7A9E7E" stroke-width="1.5" fill="none" opacity="0.4"/>
+      <!-- Flowers along the top -->
+      <g opacity="0.85">
+        <!-- Large pink flowers -->
+        <ellipse cx="60" cy="40" rx="18" ry="14" fill="#E8A0A0"/>
+        <ellipse cx="60" cy="40" rx="12" ry="9" fill="#F0B8B8"/>
+        <circle cx="60" cy="40" r="5" fill="#C98080"/>
+        <!-- Petals -->
+        <ellipse cx="60" cy="26" rx="6" ry="10" fill="#E8A0A0" opacity="0.7"/>
+        <ellipse cx="74" cy="40" rx="10" ry="6" fill="#E8A0A0" opacity="0.7"/>
+        <ellipse cx="60" cy="54" rx="6" ry="10" fill="#E8A0A0" opacity="0.7"/>
+        <ellipse cx="46" cy="40" rx="10" ry="6" fill="#E8A0A0" opacity="0.7"/>
+
+        <ellipse cx="180" cy="55" rx="15" ry="12" fill="#F0C8D0"/>
+        <ellipse cx="180" cy="55" rx="10" ry="7" fill="#F5D8DC"/>
+        <circle cx="180" cy="55" r="4" fill="#D09090"/>
+        <ellipse cx="180" cy="43" rx="5" ry="8" fill="#F0C8D0" opacity="0.8"/>
+        <ellipse cx="192" cy="55" rx="8" ry="5" fill="#F0C8D0" opacity="0.8"/>
+        <ellipse cx="180" cy="67" rx="5" ry="8" fill="#F0C8D0" opacity="0.8"/>
+        <ellipse cx="168" cy="55" rx="8" ry="5" fill="#F0C8D0" opacity="0.8"/>
+
+        <ellipse cx="300" cy="50" rx="17" ry="13" fill="#E8A0A0"/>
+        <circle cx="300" cy="50" r="5" fill="#C98080"/>
+        <ellipse cx="300" cy="37" rx="6" ry="9" fill="#E8A0A0" opacity="0.7"/>
+        <ellipse cx="313" cy="50" rx="9" ry="5" fill="#E8A0A0" opacity="0.7"/>
+        <ellipse cx="300" cy="63" rx="6" ry="9" fill="#E8A0A0" opacity="0.7"/>
+        <ellipse cx="287" cy="50" rx="9" ry="5" fill="#E8A0A0" opacity="0.7"/>
+
+        <ellipse cx="420" cy="38" rx="16" ry="12" fill="#D4849E"/>
+        <circle cx="420" cy="38" r="4" fill="#B06070"/>
+
+        <!-- White small flowers -->
+        <circle cx="130" cy="70" r="7" fill="#F5F0E8"/>
+        <circle cx="130" cy="70" r="3" fill="#E8D5A3"/>
+        <circle cx="240" cy="80" r="8" fill="#F5F0E8"/>
+        <circle cx="240" cy="80" r="3" fill="#E8D5A3"/>
+        <circle cx="355" cy="72" r="6" fill="#F5F0E8"/>
+        <circle cx="355" cy="72" r="2.5" fill="#E8D5A3"/>
+
+        <!-- Leaves -->
+        <path d="M90 30 Q110 20 105 45 Q85 55 90 30" fill="#7A9E7E" opacity="0.7"/>
+        <path d="M210 45 Q230 35 225 60 Q205 70 210 45" fill="#6B8F6E" opacity="0.6"/>
+        <path d="M330 40 Q350 30 345 55 Q325 65 330 40" fill="#7A9E7E" opacity="0.7"/>
+        <path d="M140 75 Q155 60 150 80 Q135 95 140 75" fill="#6B8F6E" opacity="0.5"/>
+
+        <!-- Hanging wisteria -->
+        <path d="M100 0 Q98 30 95 60 Q93 80 97 100" stroke="#A8C8A0" stroke-width="1" fill="none"/>
+        <circle cx="95" cy="65" r="4" fill="#C8A0C0" opacity="0.8"/>
+        <circle cx="96" cy="78" r="3" fill="#D0B0C8" opacity="0.7"/>
+        <circle cx="94" cy="90" r="3.5" fill="#C8A0C0" opacity="0.7"/>
+
+        <path d="M250 0 Q248 25 246 50 Q244 70 248 90" stroke="#A8C8A0" stroke-width="1" fill="none"/>
+        <circle cx="246" cy="55" r="4" fill="#D4A0BC" opacity="0.8"/>
+        <circle cx="247" cy="68" r="3" fill="#C8A0C0" opacity="0.7"/>
+        <circle cx="245" cy="80" r="3.5" fill="#D0B0C8" opacity="0.7"/>
+
+        <path d="M370 0 Q368 20 366 45 Q364 65 368 85" stroke="#A8C8A0" stroke-width="1" fill="none"/>
+        <circle cx="366" cy="50" r="4" fill="#C8A0C0" opacity="0.8"/>
+        <circle cx="367" cy="63" r="3" fill="#D0B0C8" opacity="0.7"/>
+        <circle cx="365" cy="75" r="3.5" fill="#C8A0C0" opacity="0.7"/>
+      </g>
+    </svg>
+
+    <div class="hero-content">
+      <div class="names-display animate-in delay-1">
+        <span class="name-main">Ahmet</span>
+        <span class="ampersand">&amp;</span>
+        <span class="name-main">Gönül</span>
+      </div>
+
+      <div class="music-bar animate-in delay-2">
+        <div class="music-line"></div>
+        <div class="music-dot"></div>
+        <button class="play-btn" onclick="toggleMusic()" aria-label="Müzik">
+          <svg id="playIcon" viewBox="0 0 14 14" fill="currentColor"><path d="M3 2l8 5-8 5V2z"/></svg>
+          <svg id="pauseIcon" viewBox="0 0 14 14" fill="currentColor" style="display:none"><rect x="2" y="2" width="4" height="10"/><rect x="8" y="2" width="4" height="10"/></svg>
+        </button>
+        <div class="music-dot"></div>
+        <div class="music-line"></div>
+      </div>
+
+      <p class="invitation-text animate-in delay-3">
+        Düğün törenimizde sizleri de aramızda<br>görmekten mutluluk duyarız
+      </p>
+
+      <div class="family-names animate-in delay-4">
+        <div class="family-col">
+          <div class="family-name">Aliye & Elbeği<br>Kurnaz</div>
+        </div>
+        <div class="family-divider"></div>
+        <div class="family-col">
+          <div class="family-name">Gözde & Bedri<br>Diker</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div style="background: var(--cream-dark); padding: 20px 0; text-align: center;">
+    <div class="gold-dot-row">
+      <div class="gold-dot"></div>
+      <div class="gold-dot large"></div>
+      <div class="gold-dot"></div>
+    </div>
+  </div>
+
+  <!-- PROGRAM SECTION -->
+  <section class="section program-section">
+
+    <!-- Top flowers -->
+    <svg class="section-flowers-top" viewBox="0 0 480 100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0 Q240 40 480 0" stroke="#A8C8A0" stroke-width="1.5" fill="none" opacity="0.4"/>
+      <ellipse cx="80" cy="20" rx="14" ry="10" fill="#E8A0A0" opacity="0.7"/>
+      <circle cx="80" cy="20" r="4" fill="#C98080"/>
+      <ellipse cx="240" cy="35" rx="16" ry="11" fill="#F0C8D0" opacity="0.7"/>
+      <circle cx="240" cy="35" r="4" fill="#D09090"/>
+      <ellipse cx="400" cy="22" rx="13" ry="9" fill="#E8A0A0" opacity="0.7"/>
+      <circle cx="400" cy="22" r="3.5" fill="#C98080"/>
+      <path d="M120 10 Q138 0 133 20 Q115 30 120 10" fill="#7A9E7E" opacity="0.6"/>
+      <path d="M290 25 Q308 15 303 35 Q285 45 290 25" fill="#6B8F6E" opacity="0.5"/>
+    </svg>
+
+    <h2 class="section-title" style="margin-top: 60px;">Program</h2>
+
+    <div class="program-timeline">
+      <div class="timeline-center"></div>
+
+      <div class="timeline-item left">
+        <div class="tl-content" style="text-align:right; padding-right: 24px;">
+          <div class="tl-time">18:30</div>
+          <div class="tl-label">Başlangıç</div>
+        </div>
+        <div class="tl-icon">🎉</div>
+        <div class="tl-content" style="padding-left: 24px;"></div>
+      </div>
+
+      <div class="timeline-item right">
+        <div class="tl-content" style="padding-right: 24px;"></div>
+        <div class="tl-icon">💍</div>
+        <div class="tl-content" style="text-align:left; padding-left: 24px;">
+          <div class="tl-time">19:00</div>
+          <div class="tl-label">Nikah Töreni</div>
+        </div>
+      </div>
+
+      <div class="timeline-item left">
+        <div class="tl-content" style="text-align:right; padding-right: 24px;">
+          <div class="tl-time">19:30</div>
+          <div class="tl-label">Yemek</div>
+        </div>
+        <div class="tl-icon">🍽️</div>
+        <div class="tl-content" style="padding-left: 24px;"></div>
+      </div>
+
+      <div class="timeline-item right">
+        <div class="tl-content" style="padding-right: 24px;"></div>
+        <div class="tl-icon">🪩</div>
+        <div class="tl-content" style="text-align:left; padding-left: 24px;">
+          <div class="tl-time">20:30</div>
+          <div class="tl-label">Eğlence</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div style="background: var(--cream-dark); padding: 20px 0; text-align: center;">
+    <div class="divider-gold"></div>
+  </div>
+
+  <!-- DETAILS SECTION -->
+  <section class="section details-section">
+
+    <svg class="section-flowers-top" viewBox="0 0 480 100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0 Q240 40 480 0" stroke="#A8C8A0" stroke-width="1.5" fill="none" opacity="0.4"/>
+      <ellipse cx="100" cy="25" rx="14" ry="10" fill="#F0C8D0" opacity="0.7"/>
+      <circle cx="100" cy="25" r="4" fill="#D09090"/>
+      <ellipse cx="240" cy="38" rx="16" ry="11" fill="#E8A0A0" opacity="0.7"/>
+      <circle cx="240" cy="38" r="4" fill="#C98080"/>
+      <ellipse cx="380" cy="26" rx="13" ry="9" fill="#F0C8D0" opacity="0.7"/>
+      <path d="M150 15 Q168 5 163 25 Q145 35 150 15" fill="#7A9E7E" opacity="0.6"/>
+    </svg>
+
+    <h2 class="section-title" style="margin-top: 60px;">Detaylar</h2>
+
+    <div class="detail-items">
+      <div class="detail-item">
+        <div class="detail-icon">
+          <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="7" width="28" height="24" rx="3" stroke="currentColor" stroke-width="1.2" fill="none"/>
+            <line x1="4" y1="13" x2="32" y2="13" stroke="currentColor" stroke-width="1.2"/>
+            <line x1="12" y1="4" x2="12" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="24" y1="4" x2="24" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="detail-text">23 Mayıs 2026</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-icon">
+          <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="13" stroke="currentColor" stroke-width="1.2" fill="none"/>
+            <line x1="18" y1="10" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="18" y1="18" x2="24" y2="22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="18" cy="18" r="1.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="detail-text">18:30</div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-icon">
+          <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 4 C11 4 6 10 6 16 C6 24 18 32 18 32 C18 32 30 24 30 16 C30 10 25 4 18 4Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+            <circle cx="18" cy="16" r="4" stroke="currentColor" stroke-width="1.2" fill="none"/>
+          </svg>
+        </div>
+        <div class="detail-text">Lunarya Roma<br>Çankaya / Ankara</div>
+      </div>
+    </div>
+
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3059.8!2d32.8597!3d39.9098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f8f5c2f3b3b%3A0x5e2c3a2a8e6f5d3a!2sLunarya%20Roma!5e0!3m2!1str!2str!4v1686000000000!5m2!1str!2str"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <a href="https://maps.google.com/maps?q=Lunarya+Roma+Ankara" target="_blank" class="map-link">
+      Konumu haritada açmak için tıklayınız
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-monogram">A & G</div>
+    <div class="divider-gold"></div>
+    <p class="footer-text">23 Mayıs 2026</p>
+  </footer>
+
+</div><!-- end #invitation -->
+
+<audio id="weddingMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  let musicPlaying = false;
+  const audio = document.getElementById('weddingMusic');
+  const playIcon = document.getElementById('playIcon');
+  const pauseIcon = document.getElementById('pauseIcon');
+
+  function toggleMusic() {
+    if (musicPlaying) {
+      audio.pause();
+      playIcon.style.display = '';
+      pauseIcon.style.display = 'none';
+    } else {
+      audio.play().catch(() => {});
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = '';
+    }
+    musicPlaying = !musicPlaying;
+  }
+
+  function openEnvelope() {
+    const overlay = document.getElementById('envelope-overlay');
+    const landing = document.getElementById('landing');
+    const invitation = document.getElementById('invitation');
+
+    overlay.classList.add('active');
+
+    const seal = document.getElementById('envSeal');
+    const flap = document.getElementById('flapPath');
+
+    setTimeout(() => {
+      seal.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+      seal.style.transform = 'translateY(20px) scale(0.8)';
+      seal.style.opacity = '0';
+    }, 300);
+
+    setTimeout(() => {
+      flap.style.transition = 'all 0.6s ease';
+      flap.setAttribute('d', 'M10 60 L150 -30 L290 60 L290 10 Q150 90 10 10 Z');
+    }, 700);
+
+    setTimeout(() => {
+      overlay.style.transition = 'opacity 0.6s ease';
+      overlay.style.opacity = '0';
+    }, 1600);
+
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      landing.style.display = 'none';
+      invitation.style.display = 'block';
+      requestAnimationFrame(() => {
+        invitation.style.opacity = '1';
+      });
+    }, 2200);
+  }
+</script>
+</body>
+</html>
