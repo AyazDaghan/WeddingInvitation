@@ -349,7 +349,7 @@
 
   .timeline-center {
     position: absolute;
-    left: 50%;
+    left: calc(50%);
     top: 0;
     bottom: 0;
     width: 1px;
@@ -358,7 +358,8 @@
   }
 
   .timeline-item {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 44px 1fr;
     align-items: center;
     margin-bottom: 32px;
     position: relative;
@@ -366,19 +367,8 @@
 
   .timeline-item:last-child { margin-bottom: 0; }
 
-  .timeline-item.left {
-    flex-direction: row;
-    text-align: right;
-  }
-
-  .timeline-item.right {
-    flex-direction: row-reverse;
-    text-align: left;
-  }
-
   .tl-content {
-    flex: 1;
-    padding: 0 16px;
+    padding: 0 14px;
   }
 
   .tl-left {
@@ -390,7 +380,7 @@
   }
 
   .tl-empty {
-    flex: 1;
+    /* empty cell placeholder */
   }
 
   .tl-time {
@@ -510,11 +500,24 @@
 
   .map-link:hover { color: var(--gold-dark); }
 
+  .footer-thanks {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--text-mid);
+    text-align: center;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+
   /* ── FOOTER ── */
   .footer {
-    padding: 40px 30px;
+    padding: 50px 30px 60px;
     text-align: center;
-    background: var(--cream-dark);
+    background: var(--cream);
+    position: relative;
+    border-top: 1px solid var(--gold-light);
   }
 
   .footer-monogram {
@@ -681,121 +684,324 @@
 
     <!-- Floral pillars left & right -->
     <svg class="floral-left" viewBox="0 0 60 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <!-- Capital at top -->
-      <rect x="10" y="80" width="40" height="10" fill="#DDD6C6" rx="1"/>
-      <rect x="14" y="90" width="32" height="6" fill="#E8E2D4" rx="1"/>
-      <!-- Pillar shaft with subtle fluting -->
-      <rect x="18" y="96" width="24" height="750" fill="#E8E3D8"/>
-      <rect x="20" y="96" width="4" height="750" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="26" y="96" width="4" height="750" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="32" y="96" width="4" height="750" fill="#F0EBE0" opacity="0.7"/>
-      <!-- Base at bottom -->
-      <rect x="12" y="846" width="36" height="8" fill="#DDD6C6" rx="1"/>
-      <rect x="8" y="854" width="44" height="6" fill="#D4CEBC" rx="1"/>
+      <!-- ── IONIC CAPITAL ── -->
+      <rect x="6"  y="62" width="48" height="6"  fill="#DDD6C6" rx="1"/>
+      <rect x="10" y="68" width="40" height="5"  fill="#E4DECE" rx="1"/>
+      <!-- Volute scrolls -->
+      <path d="M10 73 Q6 78 10 82 Q14 78 10 73" fill="none" stroke="#C8BEA8" stroke-width="1"/>
+      <path d="M50 73 Q54 78 50 82 Q46 78 50 73" fill="none" stroke="#C8BEA8" stroke-width="1"/>
+      <rect x="12" y="74" width="36" height="8"  fill="#EAE4D4" rx="1"/>
 
-      <!-- EROS / CUPID figure (left side — holding bow) -->
-      <!-- Body -->
-      <ellipse cx="30" cy="230" rx="7" ry="9" fill="#F0C8A0" opacity="0.85"/>
+      <!-- ── SHAFT with fluting ── -->
+      <rect x="16" y="82" width="28" height="752" fill="#EAE4D6"/>
+      <!-- Fluting grooves -->
+      <rect x="18" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="23" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="28" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="33" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="38" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <!-- Shadow edges -->
+      <rect x="16" y="82" width="2" height="752" fill="#D8D0C0" opacity="0.4"/>
+      <rect x="42" y="82" width="2" height="752" fill="#D8D0C0" opacity="0.4"/>
+
+      <!-- ── BASE ── -->
+      <rect x="12" y="834" width="36" height="8"  fill="#DDD6C6" rx="1"/>
+      <rect x="8"  y="842" width="44" height="7"  fill="#D4CEBC" rx="1"/>
+      <rect x="4"  y="849" width="52" height="5"  fill="#CCC4B0" rx="1"/>
+
+      <!-- ══ FAIRY / ANGEL figure at top ══ -->
+      <!-- Wings — left -->
+      <path d="M30 100 Q10 88 6 100 Q12 114 30 108" fill="#F0D8F0" opacity="0.55"/>
+      <path d="M30 100 Q8 96 4 112 Q12 124 30 116" fill="#E8C8E8" opacity="0.38"/>
+      <!-- Wings — right -->
+      <path d="M30 100 Q50 88 54 100 Q48 114 30 108" fill="#F0D8F0" opacity="0.55"/>
+      <path d="M30 100 Q52 96 56 112 Q48 124 30 116" fill="#E8C8E8" opacity="0.38"/>
+      <!-- Wing veins -->
+      <path d="M30 104 Q18 96 10 100" stroke="#D0A0D0" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M30 108 Q16 104 8 112" stroke="#D0A0D0" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <path d="M30 104 Q42 96 50 100" stroke="#D0A0D0" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M30 108 Q44 104 52 112" stroke="#D0A0D0" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <!-- Body/dress -->
+      <path d="M26 116 Q24 130 22 142 Q28 146 30 146 Q32 146 38 142 Q36 130 34 116Z" fill="#F5D8E8" opacity="0.85"/>
+      <!-- Torso -->
+      <ellipse cx="30" cy="113" rx="5" ry="7" fill="#F0C8A0" opacity="0.9"/>
       <!-- Head -->
-      <circle cx="30" cy="213" r="8" fill="#F0C8A0" opacity="0.85"/>
+      <circle cx="30" cy="103" r="6" fill="#F0C8A0" opacity="0.9"/>
       <!-- Curly hair -->
-      <ellipse cx="26" cy="208" rx="4" ry="3" fill="#D4A870" opacity="0.7"/>
-      <ellipse cx="34" cy="208" rx="4" ry="3" fill="#D4A870" opacity="0.7"/>
-      <ellipse cx="30" cy="206" rx="5" ry="2.5" fill="#D4A870" opacity="0.7"/>
-      <!-- Left arm holding bow -->
-      <line x1="30" y1="225" x2="15" y2="235" stroke="#F0C8A0" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
-      <!-- Bow -->
-      <path d="M12 220 Q5 232 12 244" stroke="#C9A84C" stroke-width="1.5" fill="none" opacity="0.8"/>
-      <line x1="12" y1="220" x2="12" y2="244" stroke="#C9A84C" stroke-width="0.8" stroke-dasharray="2,2" opacity="0.7"/>
-      <!-- Right arm reaching out -->
-      <line x1="30" y1="225" x2="46" y2="228" stroke="#F0C8A0" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
-      <!-- Arrow in hand -->
-      <line x1="40" y1="222" x2="54" y2="218" stroke="#C9A84C" stroke-width="1" opacity="0.8"/>
-      <path d="M54 218 L50 215 L53 221 Z" fill="#C9A84C" opacity="0.8"/>
+      <path d="M24 101 Q26 95 30 97 Q34 95 36 101" fill="#D4A060" opacity="0.75"/>
+      <ellipse cx="24" cy="102" rx="3" ry="2.5" fill="#C89050" opacity="0.6"/>
+      <ellipse cx="36" cy="102" rx="3" ry="2.5" fill="#C89050" opacity="0.6"/>
+      <!-- Arms -->
+      <line x1="26" y1="114" x2="16" y2="122" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <line x1="34" y1="114" x2="44" y2="118" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <!-- Wand with star -->
+      <line x1="44" y1="118" x2="52" y2="108" stroke="#C9A84C" stroke-width="1" opacity="0.85"/>
+      <path d="M52 108 L53 104 L54 108 L58 109 L54 110 L53 114 L52 110 L48 109 Z" fill="#E8D5A3" opacity="0.8" transform="scale(0.8) translate(14,10)"/>
       <!-- Legs -->
-      <line x1="28" y1="239" x2="25" y2="258" stroke="#F0C8A0" stroke-width="3.5" stroke-linecap="round" opacity="0.85"/>
-      <line x1="32" y1="239" x2="35" y2="258" stroke="#F0C8A0" stroke-width="3.5" stroke-linecap="round" opacity="0.85"/>
-      <!-- Wings -->
-      <path d="M30 220 Q10 200 8 210 Q14 222 30 225" fill="#E8D5F0" opacity="0.55"/>
-      <path d="M30 220 Q10 215 6 228 Q14 236 30 232" fill="#E8D5F0" opacity="0.4"/>
-      <path d="M30 220 Q50 200 52 210 Q46 222 30 225" fill="#E8D5F0" opacity="0.55"/>
-      <path d="M30 220 Q50 215 54 228 Q46 236 30 232" fill="#E8D5F0" opacity="0.4"/>
+      <line x1="28" y1="145" x2="26" y2="160" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+      <line x1="32" y1="145" x2="34" y2="160" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
 
-      <!-- Climbing roses on column -->
-      <path d="M30 270 Q22 310 28 350 Q34 390 26 430 Q20 470 28 510" stroke="#B8C8A0" stroke-width="1.2" fill="none" opacity="0.6"/>
-      <!-- Rose blooms -->
-      <circle cx="28" cy="300" r="5" fill="#E8A0A0" opacity="0.8"/>
-      <circle cx="28" cy="300" r="3" fill="#F0B8B8"/>
-      <circle cx="26" cy="380" r="6" fill="#D4849E" opacity="0.75"/>
-      <circle cx="26" cy="380" r="3.5" fill="#E8A0B0"/>
-      <circle cx="28" cy="455" r="5" fill="#E8A0A0" opacity="0.8"/>
-      <circle cx="28" cy="455" r="3" fill="#F0B8B8"/>
-      <!-- Rose leaves -->
-      <path d="M25 315 Q14 310 16 320 Q24 326 25 315" fill="#7A9E7E" opacity="0.6"/>
-      <path d="M27 395 Q16 390 18 400 Q26 406 27 395" fill="#6B8F6E" opacity="0.55"/>
-      <path d="M25 470 Q14 465 16 475 Q24 481 25 470" fill="#7A9E7E" opacity="0.6"/>
+      <!-- ══ PINK RIBBON BOW ══ -->
+      <!-- Ribbon wrapping down column -->
+      <path d="M30 162 Q18 190 26 220 Q34 250 20 280 Q14 310 24 340 Q34 370 18 400 Q10 430 22 460 Q32 490 20 520 Q12 550 24 580 Q34 610 22 640 Q14 670 26 700 Q36 730 24 760" stroke="#F0B8C8" stroke-width="2.5" fill="none" opacity="0.65" stroke-linecap="round"/>
+      <!-- Bow knot at top -->
+      <path d="M30 162 Q20 155 16 160 Q14 168 22 168 Q26 168 30 162Z" fill="#F0B8C8" opacity="0.7"/>
+      <path d="M30 162 Q40 155 44 160 Q46 168 38 168 Q34 168 30 162Z" fill="#F0B8C8" opacity="0.7"/>
+      <circle cx="30" cy="163" r="3" fill="#E8A0B8" opacity="0.8"/>
+      <!-- Ribbon tails -->
+      <path d="M28 166 Q22 178 20 192" stroke="#F0B8C8" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+      <path d="M32 166 Q38 178 40 192" stroke="#F0B8C8" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
 
-      <!-- Small hearts floating near Eros -->
-      <path d="M48 195 C48 192 52 192 52 196 C52 192 56 192 56 195 C56 200 52 204 52 204 C52 204 48 200 48 195Z" fill="#E8A0A0" opacity="0.5" transform="scale(0.7) translate(20,60)"/>
-      <path d="M5 240 C5 237 8 237 8 241 C8 237 11 237 11 240 C11 245 8 248 8 248 C8 248 5 245 5 240Z" fill="#E8A0A0" opacity="0.4" transform="scale(0.6) translate(5,80)"/>
+      <!-- ══ CLIMBING ROSES & VINES ══ -->
+      <!-- Main vine -->
+      <path d="M28 170 Q14 210 22 250 Q30 290 14 330 Q6 360 18 400 Q28 432 14 470 Q6 500 18 540 Q28 572 14 610 Q6 640 20 680 Q30 710 18 750" stroke="#9EB89E" stroke-width="1.4" fill="none" opacity="0.7"/>
+      <!-- Secondary vine -->
+      <path d="M32 185 Q46 225 38 265 Q30 300 46 340 Q54 372 40 412 Q30 445 46 485 Q54 518 40 558 Q30 590 46 630 Q54 662 40 700 Q32 730 44 768" stroke="#B0C8A0" stroke-width="1" fill="none" opacity="0.5"/>
+
+      <!-- Rose blooms - large -->
+      <!-- Rose 1 ~y220 -->
+      <circle cx="16" cy="225" r="7" fill="#E88080" opacity="0.85"/>
+      <circle cx="16" cy="225" r="4.5" fill="#F09898"/>
+      <circle cx="16" cy="225" r="2" fill="#C86060"/>
+      <ellipse cx="16" cy="215" rx="4" ry="6" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="24" cy="225" rx="6" ry="4" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="16" cy="235" rx="4" ry="6" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="8"  cy="225" rx="6" ry="4" fill="#E88080" opacity="0.6"/>
+
+      <!-- Rose 2 ~y310 -->
+      <circle cx="40" cy="312" r="6" fill="#D4749E" opacity="0.85"/>
+      <circle cx="40" cy="312" r="3.5" fill="#E890B0"/>
+      <circle cx="40" cy="312" r="1.8" fill="#B85888"/>
+      <ellipse cx="40" cy="303" rx="3.5" ry="5" fill="#D4749E" opacity="0.6"/>
+      <ellipse cx="47" cy="312" rx="5" ry="3" fill="#D4749E" opacity="0.6"/>
+      <ellipse cx="40" cy="321" rx="3.5" ry="5" fill="#D4749E" opacity="0.6"/>
+
+      <!-- Rose 3 ~y400 -->
+      <circle cx="14" cy="398" r="7" fill="#E88898" opacity="0.85"/>
+      <circle cx="14" cy="398" r="4.5" fill="#F0A0A8"/>
+      <circle cx="14" cy="398" r="2" fill="#C87080"/>
+      <ellipse cx="14" cy="388" rx="4" ry="6" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="22" cy="398" rx="6" ry="4" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="14" cy="408" rx="4" ry="6" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="6"  cy="398" rx="6" ry="4" fill="#E88898" opacity="0.6"/>
+
+      <!-- Rose 4 ~y480 -->
+      <circle cx="44" cy="482" r="5.5" fill="#D47898" opacity="0.85"/>
+      <circle cx="44" cy="482" r="3.5" fill="#E890A8"/>
+      <ellipse cx="44" cy="474" rx="3" ry="5" fill="#D47898" opacity="0.6"/>
+      <ellipse cx="51" cy="482" rx="5" ry="3" fill="#D47898" opacity="0.6"/>
+      <ellipse cx="44" cy="490" rx="3" ry="5" fill="#D47898" opacity="0.6"/>
+
+      <!-- Rose 5 ~y560 -->
+      <circle cx="16" cy="562" r="6.5" fill="#E88080" opacity="0.85"/>
+      <circle cx="16" cy="562" r="4" fill="#F09898"/>
+      <circle cx="16" cy="562" r="2" fill="#C86060"/>
+      <ellipse cx="16" cy="553" rx="3.5" ry="5.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="23" cy="562" rx="5.5" ry="3.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="16" cy="571" rx="3.5" ry="5.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="9"  cy="562" rx="5.5" ry="3.5" fill="#E88080" opacity="0.6"/>
+
+      <!-- Rose 6 ~y650 -->
+      <circle cx="40" cy="648" r="6" fill="#D4849E" opacity="0.8"/>
+      <circle cx="40" cy="648" r="3.8" fill="#E898B0"/>
+      <ellipse cx="40" cy="640" rx="3.5" ry="5" fill="#D4849E" opacity="0.6"/>
+      <ellipse cx="47" cy="648" rx="5" ry="3.5" fill="#D4849E" opacity="0.6"/>
+      <ellipse cx="40" cy="656" rx="3.5" ry="5" fill="#D4849E" opacity="0.6"/>
+
+      <!-- Rose 7 ~y740 -->
+      <circle cx="18" cy="738" r="6" fill="#E88898" opacity="0.8"/>
+      <circle cx="18" cy="738" r="3.5" fill="#F0A0A8"/>
+      <ellipse cx="18" cy="730" rx="3.5" ry="5" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="25" cy="738" rx="5" ry="3" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="18" cy="746" rx="3.5" ry="5" fill="#E88898" opacity="0.6"/>
+
+      <!-- Small buds along vines -->
+      <ellipse cx="22" cy="195" rx="2.5" ry="4" fill="#F0B0B8" opacity="0.8"/>
+      <ellipse cx="38" cy="270" rx="2"   ry="3" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="20" cy="360" rx="2.5" ry="4" fill="#F0B0C0" opacity="0.8"/>
+      <ellipse cx="42" cy="440" rx="2"   ry="3" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="20" cy="520" rx="2.5" ry="4" fill="#F0B0B8" opacity="0.8"/>
+      <ellipse cx="36" cy="600" rx="2"   ry="3.5" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="22" cy="695" rx="2.5" ry="4" fill="#F0B0C0" opacity="0.8"/>
+
+      <!-- Small white flowers scattered -->
+      <circle cx="36" cy="242" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="36" cy="242" r="1.8" fill="#E8D5A3"/>
+      <circle cx="12" cy="356" r="3.5" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="12" cy="356" r="1.5" fill="#E8D5A3"/>
+      <circle cx="38" cy="528" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="38" cy="528" r="1.8" fill="#E8D5A3"/>
+      <circle cx="14" cy="680" r="3.5" fill="#FFF8F0" opacity="0.85"/>
+      <circle cx="14" cy="680" r="1.5" fill="#E8D5A3"/>
+
+      <!-- Leaves -->
+      <path d="M10 210 Q0 205 2 216 Q12 222 10 210" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M24 235 Q34 228 32 240 Q22 246 24 235" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M28 285 Q18 278 16 290 Q26 298 28 285" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M42 328 Q52 322 50 334 Q40 340 42 328" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M10 378 Q0 372 2 384 Q12 390 10 378" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M26 415 Q36 408 34 420 Q24 426 26 415" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M10 460 Q0 454 2 466 Q12 472 10 460" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M44 505 Q54 498 52 510 Q42 516 44 505" fill="#6B8F6E" opacity="0.6"/>
+      <path d="M10 548 Q0 542 2 554 Q12 560 10 548" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M24 585 Q14 578 12 590 Q22 598 24 585" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M44 630 Q54 624 52 636 Q42 642 44 630" fill="#7A9E7E" opacity="0.65"/>
+      <path d="M10 668 Q0 662 2 674 Q12 680 10 668" fill="#6B8F6E" opacity="0.7"/>
+      <path d="M26 720 Q36 714 34 726 Q24 732 26 720" fill="#7A9E7E" opacity="0.65"/>
+      <path d="M10 755 Q0 748 2 760 Q12 766 10 755" fill="#6B8F6E" opacity="0.6"/>
+
+      <!-- Small hearts -->
+      <path d="M46 200 C46 197 49 197 49 200 C49 197 52 197 52 200 C52 204 49 207 49 207 C49 207 46 204 46 200Z" fill="#E8A0B0" opacity="0.5"/>
+      <path d="M4 340 C4 337 7 337 7 340 C7 337 10 337 10 340 C10 344 7 347 7 347 C7 347 4 344 4 340Z" fill="#E8A0B0" opacity="0.4"/>
+      <path d="M48 510 C48 507 51 507 51 510 C51 507 54 507 54 510 C54 514 51 517 51 517 C51 517 48 514 48 510Z" fill="#E8A0B0" opacity="0.45"/>
     </svg>
 
     <svg class="floral-right" viewBox="0 0 60 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <!-- Capital at top -->
-      <rect x="10" y="80" width="40" height="10" fill="#DDD6C6" rx="1"/>
-      <rect x="14" y="90" width="32" height="6" fill="#E8E2D4" rx="1"/>
-      <!-- Pillar shaft with subtle fluting -->
-      <rect x="18" y="96" width="24" height="750" fill="#E8E3D8"/>
-      <rect x="20" y="96" width="4" height="750" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="26" y="96" width="4" height="750" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="32" y="96" width="4" height="750" fill="#F0EBE0" opacity="0.7"/>
-      <!-- Base at bottom -->
-      <rect x="12" y="846" width="36" height="8" fill="#DDD6C6" rx="1"/>
-      <rect x="8" y="854" width="44" height="6" fill="#D4CEBC" rx="1"/>
+      <!-- ── IONIC CAPITAL ── -->
+      <rect x="6"  y="62" width="48" height="6"  fill="#DDD6C6" rx="1"/>
+      <rect x="10" y="68" width="40" height="5"  fill="#E4DECE" rx="1"/>
+      <path d="M10 73 Q6 78 10 82 Q14 78 10 73" fill="none" stroke="#C8BEA8" stroke-width="1"/>
+      <path d="M50 73 Q54 78 50 82 Q46 78 50 73" fill="none" stroke="#C8BEA8" stroke-width="1"/>
+      <rect x="12" y="74" width="36" height="8"  fill="#EAE4D4" rx="1"/>
 
-      <!-- PSYCHE figure (right side — draped, reaching) -->
-      <!-- Flowing drape/robe -->
-      <path d="M22 258 Q18 280 20 310 Q22 340 18 370 Q15 395 20 410" stroke="#E8D0C0" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.5"/>
-      <!-- Body -->
-      <ellipse cx="30" cy="232" rx="7" ry="10" fill="#F0C8A0" opacity="0.85"/>
-      <!-- Head -->
-      <circle cx="30" cy="213" r="8" fill="#F0C8A0" opacity="0.85"/>
-      <!-- Hair — elegant updo -->
-      <ellipse cx="30" cy="207" rx="8" ry="5" fill="#C4945C" opacity="0.7"/>
-      <ellipse cx="30" cy="204" rx="5" ry="3" fill="#B88040" opacity="0.7"/>
-      <circle cx="30" cy="202" r="2" fill="#C4945C" opacity="0.6"/>
-      <!-- Arms reaching upward (butterfly wings pose) -->
-      <line x1="30" y1="225" x2="14" y2="210" stroke="#F0C8A0" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
-      <line x1="30" y1="225" x2="46" y2="210" stroke="#F0C8A0" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
-      <!-- Butterfly wings (Psyche's symbol) -->
-      <path d="M30 222 Q8 200 4 215 Q10 232 30 228" fill="#D0E8C0" opacity="0.5"/>
-      <path d="M30 222 Q8 210 2 228 Q10 242 30 235" fill="#D0E8C0" opacity="0.35"/>
-      <path d="M30 222 Q52 200 56 215 Q50 232 30 228" fill="#C8D8F0" opacity="0.5"/>
-      <path d="M30 222 Q52 210 58 228 Q50 242 30 235" fill="#C8D8F0" opacity="0.35"/>
-      <!-- Wing veins -->
-      <path d="M30 224 Q18 212 10 216" stroke="#A8C890" stroke-width="0.5" fill="none" opacity="0.5"/>
-      <path d="M30 224 Q42 212 50 216" stroke="#98B8D8" stroke-width="0.5" fill="none" opacity="0.5"/>
-      <!-- Legs with drape -->
-      <line x1="28" y1="242" x2="26" y2="265" stroke="#F0C8A0" stroke-width="3.5" stroke-linecap="round" opacity="0.8"/>
-      <line x1="32" y1="242" x2="34" y2="265" stroke="#F0C8A0" stroke-width="3.5" stroke-linecap="round" opacity="0.8"/>
+      <!-- ── SHAFT with fluting ── -->
+      <rect x="16" y="82" width="28" height="752" fill="#EAE4D6"/>
+      <rect x="18" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="23" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="28" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="33" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="38" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="16" y="82" width="2" height="752" fill="#D8D0C0" opacity="0.4"/>
+      <rect x="42" y="82" width="2" height="752" fill="#D8D0C0" opacity="0.4"/>
 
-      <!-- Climbing jasmine/vine on column -->
-      <path d="M30 280 Q38 320 32 360 Q26 400 34 440 Q40 480 32 520" stroke="#B8C8A0" stroke-width="1.2" fill="none" opacity="0.6"/>
-      <!-- Jasmine blooms (small white) -->
-      <circle cx="32" cy="320" r="5" fill="#F5F0E8" opacity="0.9"/>
-      <circle cx="32" cy="320" r="2.5" fill="#E8D5A3"/>
-      <circle cx="34" cy="400" r="5.5" fill="#F0C8D0" opacity="0.8"/>
-      <circle cx="34" cy="400" r="3" fill="#E8A8B8"/>
-      <circle cx="32" cy="475" r="5" fill="#F5F0E8" opacity="0.9"/>
-      <circle cx="32" cy="475" r="2.5" fill="#E8D5A3"/>
+      <!-- ── BASE ── -->
+      <rect x="12" y="834" width="36" height="8"  fill="#DDD6C6" rx="1"/>
+      <rect x="8"  y="842" width="44" height="7"  fill="#D4CEBC" rx="1"/>
+      <rect x="4"  y="849" width="52" height="5"  fill="#CCC4B0" rx="1"/>
+
+      <!-- ══ FAIRY / ANGEL figure ══ -->
+      <path d="M30 100 Q10 88 6 100 Q12 114 30 108" fill="#D8F0D8" opacity="0.55"/>
+      <path d="M30 100 Q8 96 4 112 Q12 124 30 116" fill="#C8E8C8" opacity="0.38"/>
+      <path d="M30 100 Q50 88 54 100 Q48 114 30 108" fill="#D8F0D8" opacity="0.55"/>
+      <path d="M30 100 Q52 96 56 112 Q48 124 30 116" fill="#C8E8C8" opacity="0.38"/>
+      <path d="M30 104 Q18 96 10 100" stroke="#A0C0A0" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M30 108 Q16 104 8 112" stroke="#A0C0A0" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <path d="M30 104 Q42 96 50 100" stroke="#A0C0A0" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M30 108 Q44 104 52 112" stroke="#A0C0A0" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <path d="M26 116 Q24 130 22 142 Q28 146 30 146 Q32 146 38 142 Q36 130 34 116Z" fill="#D8F0E8" opacity="0.85"/>
+      <ellipse cx="30" cy="113" rx="5" ry="7" fill="#F0C8A0" opacity="0.9"/>
+      <circle cx="30" cy="103" r="6" fill="#F0C8A0" opacity="0.9"/>
+      <path d="M24 101 Q26 95 30 97 Q34 95 36 101" fill="#D4A060" opacity="0.75"/>
+      <ellipse cx="24" cy="102" rx="3" ry="2.5" fill="#C89050" opacity="0.6"/>
+      <ellipse cx="36" cy="102" rx="3" ry="2.5" fill="#C89050" opacity="0.6"/>
+      <line x1="26" y1="114" x2="16" y2="120" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <line x1="34" y1="114" x2="44" y2="118" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <!-- Holding flowers -->
+      <line x1="16" y1="120" x2="8" y2="112" stroke="#9EB89E" stroke-width="1" opacity="0.8"/>
+      <circle cx="8" cy="110" r="4" fill="#E88898" opacity="0.85"/>
+      <circle cx="8" cy="110" r="2" fill="#F0A0A8"/>
+      <line x1="28" y1="145" x2="26" y2="160" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+      <line x1="32" y1="145" x2="34" y2="160" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+
+      <!-- ══ GREEN RIBBON BOW ══ -->
+      <path d="M30 162 Q42 190 34 220 Q26 250 40 280 Q46 310 36 340 Q26 370 42 400 Q50 430 38 460 Q28 490 40 520 Q48 550 36 580 Q26 610 38 640 Q46 670 34 700 Q24 730 36 760" stroke="#B8D8B8" stroke-width="2.5" fill="none" opacity="0.65" stroke-linecap="round"/>
+      <path d="M30 162 Q20 155 16 160 Q14 168 22 168 Q26 168 30 162Z" fill="#B8D8B8" opacity="0.7"/>
+      <path d="M30 162 Q40 155 44 160 Q46 168 38 168 Q34 168 30 162Z" fill="#B8D8B8" opacity="0.7"/>
+      <circle cx="30" cy="163" r="3" fill="#90B890" opacity="0.8"/>
+      <path d="M28 166 Q22 178 20 192" stroke="#B8D8B8" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+      <path d="M32 166 Q38 178 40 192" stroke="#B8D8B8" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+
+      <!-- ══ CLIMBING VINES ══ -->
+      <path d="M32 170 Q46 210 38 250 Q30 290 46 330 Q54 362 40 402 Q30 435 46 475 Q54 508 40 548 Q30 580 46 620 Q54 652 40 690 Q32 720 44 758" stroke="#9EB89E" stroke-width="1.4" fill="none" opacity="0.7"/>
+      <path d="M28 185 Q14 225 22 265 Q30 300 14 340 Q6 372 20 412 Q30 445 14 485 Q6 518 20 558 Q30 590 14 630 Q6 662 20 700 Q28 730 16 768" stroke="#B0C8A0" stroke-width="1" fill="none" opacity="0.5"/>
+
+      <!-- Rose blooms -->
+      <circle cx="44" cy="222" r="7" fill="#E88080" opacity="0.85"/>
+      <circle cx="44" cy="222" r="4.5" fill="#F09898"/>
+      <circle cx="44" cy="222" r="2" fill="#C86060"/>
+      <ellipse cx="44" cy="212" rx="4" ry="6" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="52" cy="222" rx="6" ry="4" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="44" cy="232" rx="4" ry="6" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="36" cy="222" rx="6" ry="4" fill="#E88080" opacity="0.6"/>
+
+      <circle cx="16" cy="308" r="6" fill="#D4749E" opacity="0.85"/>
+      <circle cx="16" cy="308" r="3.5" fill="#E890B0"/>
+      <ellipse cx="16" cy="299" rx="3.5" ry="5" fill="#D4749E" opacity="0.6"/>
+      <ellipse cx="9"  cy="308" rx="5" ry="3" fill="#D4749E" opacity="0.6"/>
+      <ellipse cx="16" cy="317" rx="3.5" ry="5" fill="#D4749E" opacity="0.6"/>
+
+      <circle cx="46" cy="395" r="7" fill="#E88898" opacity="0.85"/>
+      <circle cx="46" cy="395" r="4.5" fill="#F0A0A8"/>
+      <circle cx="46" cy="395" r="2" fill="#C87080"/>
+      <ellipse cx="46" cy="385" rx="4" ry="6" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="54" cy="395" rx="6" ry="4" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="46" cy="405" rx="4" ry="6" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="38" cy="395" rx="6" ry="4" fill="#E88898" opacity="0.6"/>
+
+      <circle cx="14" cy="478" r="5.5" fill="#D47898" opacity="0.85"/>
+      <circle cx="14" cy="478" r="3.5" fill="#E890A8"/>
+      <ellipse cx="14" cy="470" rx="3" ry="5" fill="#D47898" opacity="0.6"/>
+      <ellipse cx="7"  cy="478" rx="5" ry="3" fill="#D47898" opacity="0.6"/>
+      <ellipse cx="14" cy="486" rx="3" ry="5" fill="#D47898" opacity="0.6"/>
+
+      <circle cx="44" cy="558" r="6.5" fill="#E88080" opacity="0.85"/>
+      <circle cx="44" cy="558" r="4" fill="#F09898"/>
+      <ellipse cx="44" cy="549" rx="3.5" ry="5.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="51" cy="558" rx="5.5" ry="3.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="44" cy="567" rx="3.5" ry="5.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="37" cy="558" rx="5.5" ry="3.5" fill="#E88080" opacity="0.6"/>
+
+      <circle cx="16" cy="645" r="6" fill="#D4849E" opacity="0.8"/>
+      <circle cx="16" cy="645" r="3.8" fill="#E898B0"/>
+      <ellipse cx="16" cy="637" rx="3.5" ry="5" fill="#D4849E" opacity="0.6"/>
+      <ellipse cx="9"  cy="645" rx="5" ry="3.5" fill="#D4849E" opacity="0.6"/>
+      <ellipse cx="16" cy="653" rx="3.5" ry="5" fill="#D4849E" opacity="0.6"/>
+
+      <circle cx="42" cy="735" r="6" fill="#E88898" opacity="0.8"/>
+      <circle cx="42" cy="735" r="3.5" fill="#F0A0A8"/>
+      <ellipse cx="42" cy="727" rx="3.5" ry="5" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="49" cy="735" rx="5" ry="3" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="42" cy="743" rx="3.5" ry="5" fill="#E88898" opacity="0.6"/>
+
+      <!-- Small buds -->
+      <ellipse cx="38" cy="192" rx="2.5" ry="4" fill="#F0B0B8" opacity="0.8"/>
+      <ellipse cx="22" cy="268" rx="2"   ry="3" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="40" cy="358" rx="2.5" ry="4" fill="#F0B0C0" opacity="0.8"/>
+      <ellipse cx="18" cy="438" rx="2"   ry="3" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="40" cy="518" rx="2.5" ry="4" fill="#F0B0B8" opacity="0.8"/>
+      <ellipse cx="24" cy="598" rx="2"   ry="3.5" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="38" cy="692" rx="2.5" ry="4" fill="#F0B0C0" opacity="0.8"/>
+
+      <!-- Small white flowers -->
+      <circle cx="24" cy="238" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="24" cy="238" r="1.8" fill="#E8D5A3"/>
+      <circle cx="48" cy="352" r="3.5" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="48" cy="352" r="1.5" fill="#E8D5A3"/>
+      <circle cx="22" cy="525" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="22" cy="525" r="1.8" fill="#E8D5A3"/>
+      <circle cx="46" cy="676" r="3.5" fill="#FFF8F0" opacity="0.85"/>
+      <circle cx="46" cy="676" r="1.5" fill="#E8D5A3"/>
+
       <!-- Leaves -->
-      <path d="M35 335 Q46 330 44 340 Q36 346 35 335" fill="#7A9E7E" opacity="0.6"/>
-      <path d="M33 415 Q44 410 42 420 Q34 426 33 415" fill="#6B8F6E" opacity="0.55"/>
-      <path d="M35 490 Q46 485 44 495 Q36 501 35 490" fill="#7A9E7E" opacity="0.6"/>
+      <path d="M50 208 Q60 202 58 214 Q48 220 50 208" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M36 232 Q26 225 28 238 Q38 244 36 232" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M32 282 Q42 276 40 288 Q30 294 32 282" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M18 325 Q8 318 6 330 Q16 338 18 325" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M50 375 Q60 368 58 380 Q48 388 50 375" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M34 412 Q24 405 22 417 Q32 425 34 412" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M50 458 Q60 452 58 464 Q48 470 50 458" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M16 502 Q6 495 4 507 Q14 515 16 502" fill="#6B8F6E" opacity="0.6"/>
+      <path d="M50 545 Q60 538 58 550 Q48 558 50 545" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M36 582 Q46 576 44 588 Q34 594 36 582" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M16 628 Q6 622 4 634 Q14 640 16 628" fill="#7A9E7E" opacity="0.65"/>
+      <path d="M50 665 Q60 658 58 670 Q48 678 50 665" fill="#6B8F6E" opacity="0.7"/>
+      <path d="M34 717 Q24 710 22 722 Q32 730 34 717" fill="#7A9E7E" opacity="0.65"/>
+      <path d="M50 752 Q60 746 58 758 Q48 764 50 752" fill="#6B8F6E" opacity="0.6"/>
 
-      <!-- Small stars/sparkles near Psyche (goddess symbolism) -->
-      <path d="M50 195 L51 190 L52 195 L57 196 L52 197 L51 202 L50 197 L45 196 Z" fill="#E8D5A3" opacity="0.5" transform="scale(0.7) translate(20,60)"/>
-      <path d="M4 250 L5 246 L6 250 L10 251 L6 252 L5 256 L4 252 L0 251 Z" fill="#E8D5A3" opacity="0.4" transform="scale(0.6) translate(5,80)"/>
+      <!-- Small hearts -->
+      <path d="M6 198 C6 195 9 195 9 198 C9 195 12 195 12 198 C12 202 9 205 9 205 C9 205 6 202 6 198Z" fill="#E8A0B0" opacity="0.5"/>
+      <path d="M54 338 C54 335 57 335 57 338 C57 335 60 335 60 338 C60 342 57 345 57 345 C57 345 54 342 54 338Z" fill="#E8A0B0" opacity="0.4"/>
+      <path d="M6 508 C6 505 9 505 9 508 C9 505 12 505 12 508 C12 512 9 515 9 515 C9 515 6 512 6 508Z" fill="#E8A0B0" opacity="0.45"/>
     </svg>
 
     <!-- Top floral garland -->
@@ -918,47 +1124,325 @@
 
     <!-- Left column -->
     <svg class="floral-left" viewBox="0 0 60 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="0" width="40" height="10" fill="#DDD6C6" rx="1"/>
-      <rect x="14" y="10" width="32" height="6" fill="#E8E2D4" rx="1"/>
-      <rect x="18" y="16" width="24" height="840" fill="#E8E3D8"/>
-      <rect x="20" y="16" width="4" height="840" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="26" y="16" width="4" height="840" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="32" y="16" width="4" height="840" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="12" y="856" width="36" height="8" fill="#DDD6C6" rx="1"/>
-      <rect x="8" y="864" width="44" height="6" fill="#D4CEBC" rx="1"/>
-      <!-- Climbing roses -->
-      <path d="M30 30 Q22 120 28 210 Q34 300 26 390 Q20 480 28 570" stroke="#B8C8A0" stroke-width="1.2" fill="none" opacity="0.6"/>
-      <circle cx="28" cy="120" r="5" fill="#E8A0A0" opacity="0.8"/>
-      <circle cx="26" cy="280" r="6" fill="#D4849E" opacity="0.75"/>
-      <circle cx="28" cy="440" r="5" fill="#E8A0A0" opacity="0.8"/>
-      <circle cx="26" cy="560" r="5" fill="#D4849E" opacity="0.7"/>
-      <path d="M25 135 Q14 130 16 140 Q24 146 25 135" fill="#7A9E7E" opacity="0.6"/>
-      <path d="M27 295 Q16 290 18 300 Q26 306 27 295" fill="#6B8F6E" opacity="0.55"/>
-      <path d="M25 455 Q14 450 16 460 Q24 466 25 455" fill="#7A9E7E" opacity="0.6"/>
+      <!-- ── IONIC CAPITAL ── -->
+      <rect x="6"  y="62" width="48" height="6"  fill="#DDD6C6" rx="1"/>
+      <rect x="10" y="68" width="40" height="5"  fill="#E4DECE" rx="1"/>
+      <!-- Volute scrolls -->
+      <path d="M10 73 Q6 78 10 82 Q14 78 10 73" fill="none" stroke="#C8BEA8" stroke-width="1"/>
+      <path d="M50 73 Q54 78 50 82 Q46 78 50 73" fill="none" stroke="#C8BEA8" stroke-width="1"/>
+      <rect x="12" y="74" width="36" height="8"  fill="#EAE4D4" rx="1"/>
+
+      <!-- ── SHAFT with fluting ── -->
+      <rect x="16" y="82" width="28" height="752" fill="#EAE4D6"/>
+      <!-- Fluting grooves -->
+      <rect x="18" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="23" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="28" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="33" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="38" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <!-- Shadow edges -->
+      <rect x="16" y="82" width="2" height="752" fill="#D8D0C0" opacity="0.4"/>
+      <rect x="42" y="82" width="2" height="752" fill="#D8D0C0" opacity="0.4"/>
+
+      <!-- ── BASE ── -->
+      <rect x="12" y="834" width="36" height="8"  fill="#DDD6C6" rx="1"/>
+      <rect x="8"  y="842" width="44" height="7"  fill="#D4CEBC" rx="1"/>
+      <rect x="4"  y="849" width="52" height="5"  fill="#CCC4B0" rx="1"/>
+
+      <!-- ══ FAIRY / ANGEL figure at top ══ -->
+      <!-- Wings — left -->
+      <path d="M30 100 Q10 88 6 100 Q12 114 30 108" fill="#F0D8F0" opacity="0.55"/>
+      <path d="M30 100 Q8 96 4 112 Q12 124 30 116" fill="#E8C8E8" opacity="0.38"/>
+      <!-- Wings — right -->
+      <path d="M30 100 Q50 88 54 100 Q48 114 30 108" fill="#F0D8F0" opacity="0.55"/>
+      <path d="M30 100 Q52 96 56 112 Q48 124 30 116" fill="#E8C8E8" opacity="0.38"/>
+      <!-- Wing veins -->
+      <path d="M30 104 Q18 96 10 100" stroke="#D0A0D0" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M30 108 Q16 104 8 112" stroke="#D0A0D0" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <path d="M30 104 Q42 96 50 100" stroke="#D0A0D0" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M30 108 Q44 104 52 112" stroke="#D0A0D0" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <!-- Body/dress -->
+      <path d="M26 116 Q24 130 22 142 Q28 146 30 146 Q32 146 38 142 Q36 130 34 116Z" fill="#F5D8E8" opacity="0.85"/>
+      <!-- Torso -->
+      <ellipse cx="30" cy="113" rx="5" ry="7" fill="#F0C8A0" opacity="0.9"/>
+      <!-- Head -->
+      <circle cx="30" cy="103" r="6" fill="#F0C8A0" opacity="0.9"/>
+      <!-- Curly hair -->
+      <path d="M24 101 Q26 95 30 97 Q34 95 36 101" fill="#D4A060" opacity="0.75"/>
+      <ellipse cx="24" cy="102" rx="3" ry="2.5" fill="#C89050" opacity="0.6"/>
+      <ellipse cx="36" cy="102" rx="3" ry="2.5" fill="#C89050" opacity="0.6"/>
+      <!-- Arms -->
+      <line x1="26" y1="114" x2="16" y2="122" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <line x1="34" y1="114" x2="44" y2="118" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <!-- Wand with star -->
+      <line x1="44" y1="118" x2="52" y2="108" stroke="#C9A84C" stroke-width="1" opacity="0.85"/>
+      <path d="M52 108 L53 104 L54 108 L58 109 L54 110 L53 114 L52 110 L48 109 Z" fill="#E8D5A3" opacity="0.8" transform="scale(0.8) translate(14,10)"/>
+      <!-- Legs -->
+      <line x1="28" y1="145" x2="26" y2="160" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+      <line x1="32" y1="145" x2="34" y2="160" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+
+      <!-- ══ PINK RIBBON BOW ══ -->
+      <!-- Ribbon wrapping down column -->
+      <path d="M30 162 Q18 190 26 220 Q34 250 20 280 Q14 310 24 340 Q34 370 18 400 Q10 430 22 460 Q32 490 20 520 Q12 550 24 580 Q34 610 22 640 Q14 670 26 700 Q36 730 24 760" stroke="#F0B8C8" stroke-width="2.5" fill="none" opacity="0.65" stroke-linecap="round"/>
+      <!-- Bow knot at top -->
+      <path d="M30 162 Q20 155 16 160 Q14 168 22 168 Q26 168 30 162Z" fill="#F0B8C8" opacity="0.7"/>
+      <path d="M30 162 Q40 155 44 160 Q46 168 38 168 Q34 168 30 162Z" fill="#F0B8C8" opacity="0.7"/>
+      <circle cx="30" cy="163" r="3" fill="#E8A0B8" opacity="0.8"/>
+      <!-- Ribbon tails -->
+      <path d="M28 166 Q22 178 20 192" stroke="#F0B8C8" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+      <path d="M32 166 Q38 178 40 192" stroke="#F0B8C8" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+
+      <!-- ══ CLIMBING ROSES & VINES ══ -->
+      <!-- Main vine -->
+      <path d="M28 170 Q14 210 22 250 Q30 290 14 330 Q6 360 18 400 Q28 432 14 470 Q6 500 18 540 Q28 572 14 610 Q6 640 20 680 Q30 710 18 750" stroke="#9EB89E" stroke-width="1.4" fill="none" opacity="0.7"/>
+      <!-- Secondary vine -->
+      <path d="M32 185 Q46 225 38 265 Q30 300 46 340 Q54 372 40 412 Q30 445 46 485 Q54 518 40 558 Q30 590 46 630 Q54 662 40 700 Q32 730 44 768" stroke="#B0C8A0" stroke-width="1" fill="none" opacity="0.5"/>
+
+      <!-- Rose blooms - large -->
+      <!-- Rose 1 ~y220 -->
+      <circle cx="16" cy="225" r="7" fill="#E88080" opacity="0.85"/>
+      <circle cx="16" cy="225" r="4.5" fill="#F09898"/>
+      <circle cx="16" cy="225" r="2" fill="#C86060"/>
+      <ellipse cx="16" cy="215" rx="4" ry="6" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="24" cy="225" rx="6" ry="4" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="16" cy="235" rx="4" ry="6" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="8"  cy="225" rx="6" ry="4" fill="#E88080" opacity="0.6"/>
+
+      <!-- Rose 2 ~y310 -->
+      <circle cx="40" cy="312" r="6" fill="#D4749E" opacity="0.85"/>
+      <circle cx="40" cy="312" r="3.5" fill="#E890B0"/>
+      <circle cx="40" cy="312" r="1.8" fill="#B85888"/>
+      <ellipse cx="40" cy="303" rx="3.5" ry="5" fill="#D4749E" opacity="0.6"/>
+      <ellipse cx="47" cy="312" rx="5" ry="3" fill="#D4749E" opacity="0.6"/>
+      <ellipse cx="40" cy="321" rx="3.5" ry="5" fill="#D4749E" opacity="0.6"/>
+
+      <!-- Rose 3 ~y400 -->
+      <circle cx="14" cy="398" r="7" fill="#E88898" opacity="0.85"/>
+      <circle cx="14" cy="398" r="4.5" fill="#F0A0A8"/>
+      <circle cx="14" cy="398" r="2" fill="#C87080"/>
+      <ellipse cx="14" cy="388" rx="4" ry="6" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="22" cy="398" rx="6" ry="4" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="14" cy="408" rx="4" ry="6" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="6"  cy="398" rx="6" ry="4" fill="#E88898" opacity="0.6"/>
+
+      <!-- Rose 4 ~y480 -->
+      <circle cx="44" cy="482" r="5.5" fill="#D47898" opacity="0.85"/>
+      <circle cx="44" cy="482" r="3.5" fill="#E890A8"/>
+      <ellipse cx="44" cy="474" rx="3" ry="5" fill="#D47898" opacity="0.6"/>
+      <ellipse cx="51" cy="482" rx="5" ry="3" fill="#D47898" opacity="0.6"/>
+      <ellipse cx="44" cy="490" rx="3" ry="5" fill="#D47898" opacity="0.6"/>
+
+      <!-- Rose 5 ~y560 -->
+      <circle cx="16" cy="562" r="6.5" fill="#E88080" opacity="0.85"/>
+      <circle cx="16" cy="562" r="4" fill="#F09898"/>
+      <circle cx="16" cy="562" r="2" fill="#C86060"/>
+      <ellipse cx="16" cy="553" rx="3.5" ry="5.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="23" cy="562" rx="5.5" ry="3.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="16" cy="571" rx="3.5" ry="5.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="9"  cy="562" rx="5.5" ry="3.5" fill="#E88080" opacity="0.6"/>
+
+      <!-- Rose 6 ~y650 -->
+      <circle cx="40" cy="648" r="6" fill="#D4849E" opacity="0.8"/>
+      <circle cx="40" cy="648" r="3.8" fill="#E898B0"/>
+      <ellipse cx="40" cy="640" rx="3.5" ry="5" fill="#D4849E" opacity="0.6"/>
+      <ellipse cx="47" cy="648" rx="5" ry="3.5" fill="#D4849E" opacity="0.6"/>
+      <ellipse cx="40" cy="656" rx="3.5" ry="5" fill="#D4849E" opacity="0.6"/>
+
+      <!-- Rose 7 ~y740 -->
+      <circle cx="18" cy="738" r="6" fill="#E88898" opacity="0.8"/>
+      <circle cx="18" cy="738" r="3.5" fill="#F0A0A8"/>
+      <ellipse cx="18" cy="730" rx="3.5" ry="5" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="25" cy="738" rx="5" ry="3" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="18" cy="746" rx="3.5" ry="5" fill="#E88898" opacity="0.6"/>
+
+      <!-- Small buds along vines -->
+      <ellipse cx="22" cy="195" rx="2.5" ry="4" fill="#F0B0B8" opacity="0.8"/>
+      <ellipse cx="38" cy="270" rx="2"   ry="3" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="20" cy="360" rx="2.5" ry="4" fill="#F0B0C0" opacity="0.8"/>
+      <ellipse cx="42" cy="440" rx="2"   ry="3" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="20" cy="520" rx="2.5" ry="4" fill="#F0B0B8" opacity="0.8"/>
+      <ellipse cx="36" cy="600" rx="2"   ry="3.5" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="22" cy="695" rx="2.5" ry="4" fill="#F0B0C0" opacity="0.8"/>
+
+      <!-- Small white flowers scattered -->
+      <circle cx="36" cy="242" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="36" cy="242" r="1.8" fill="#E8D5A3"/>
+      <circle cx="12" cy="356" r="3.5" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="12" cy="356" r="1.5" fill="#E8D5A3"/>
+      <circle cx="38" cy="528" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="38" cy="528" r="1.8" fill="#E8D5A3"/>
+      <circle cx="14" cy="680" r="3.5" fill="#FFF8F0" opacity="0.85"/>
+      <circle cx="14" cy="680" r="1.5" fill="#E8D5A3"/>
+
+      <!-- Leaves -->
+      <path d="M10 210 Q0 205 2 216 Q12 222 10 210" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M24 235 Q34 228 32 240 Q22 246 24 235" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M28 285 Q18 278 16 290 Q26 298 28 285" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M42 328 Q52 322 50 334 Q40 340 42 328" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M10 378 Q0 372 2 384 Q12 390 10 378" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M26 415 Q36 408 34 420 Q24 426 26 415" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M10 460 Q0 454 2 466 Q12 472 10 460" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M44 505 Q54 498 52 510 Q42 516 44 505" fill="#6B8F6E" opacity="0.6"/>
+      <path d="M10 548 Q0 542 2 554 Q12 560 10 548" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M24 585 Q14 578 12 590 Q22 598 24 585" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M44 630 Q54 624 52 636 Q42 642 44 630" fill="#7A9E7E" opacity="0.65"/>
+      <path d="M10 668 Q0 662 2 674 Q12 680 10 668" fill="#6B8F6E" opacity="0.7"/>
+      <path d="M26 720 Q36 714 34 726 Q24 732 26 720" fill="#7A9E7E" opacity="0.65"/>
+      <path d="M10 755 Q0 748 2 760 Q12 766 10 755" fill="#6B8F6E" opacity="0.6"/>
+
+      <!-- Small hearts -->
+      <path d="M46 200 C46 197 49 197 49 200 C49 197 52 197 52 200 C52 204 49 207 49 207 C49 207 46 204 46 200Z" fill="#E8A0B0" opacity="0.5"/>
+      <path d="M4 340 C4 337 7 337 7 340 C7 337 10 337 10 340 C10 344 7 347 7 347 C7 347 4 344 4 340Z" fill="#E8A0B0" opacity="0.4"/>
+      <path d="M48 510 C48 507 51 507 51 510 C51 507 54 507 54 510 C54 514 51 517 51 517 C51 517 48 514 48 510Z" fill="#E8A0B0" opacity="0.45"/>
     </svg>
 
     <!-- Right column -->
     <svg class="floral-right" viewBox="0 0 60 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="0" width="40" height="10" fill="#DDD6C6" rx="1"/>
-      <rect x="14" y="10" width="32" height="6" fill="#E8E2D4" rx="1"/>
-      <rect x="18" y="16" width="24" height="840" fill="#E8E3D8"/>
-      <rect x="20" y="16" width="4" height="840" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="26" y="16" width="4" height="840" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="32" y="16" width="4" height="840" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="12" y="856" width="36" height="8" fill="#DDD6C6" rx="1"/>
-      <rect x="8" y="864" width="44" height="6" fill="#D4CEBC" rx="1"/>
-      <!-- Climbing jasmine -->
-      <path d="M30 30 Q38 120 32 210 Q26 300 34 390 Q40 480 32 570" stroke="#B8C8A0" stroke-width="1.2" fill="none" opacity="0.6"/>
-      <circle cx="32" cy="110" r="5" fill="#F5F0E8" opacity="0.9"/>
-      <circle cx="32" cy="110" r="2.5" fill="#E8D5A3"/>
-      <circle cx="34" cy="290" r="5.5" fill="#F0C8D0" opacity="0.8"/>
-      <circle cx="34" cy="290" r="3" fill="#E8A8B8"/>
-      <circle cx="32" cy="450" r="5" fill="#F5F0E8" opacity="0.9"/>
-      <circle cx="32" cy="450" r="2.5" fill="#E8D5A3"/>
-      <circle cx="33" cy="570" r="5" fill="#F0C8D0" opacity="0.75"/>
-      <path d="M35 125 Q46 120 44 130 Q36 136 35 125" fill="#7A9E7E" opacity="0.6"/>
-      <path d="M33 305 Q44 300 42 310 Q34 316 33 305" fill="#6B8F6E" opacity="0.55"/>
-      <path d="M35 465 Q46 460 44 470 Q36 476 35 465" fill="#7A9E7E" opacity="0.6"/>
+      <!-- ── IONIC CAPITAL ── -->
+      <rect x="6"  y="62" width="48" height="6"  fill="#DDD6C6" rx="1"/>
+      <rect x="10" y="68" width="40" height="5"  fill="#E4DECE" rx="1"/>
+      <path d="M10 73 Q6 78 10 82 Q14 78 10 73" fill="none" stroke="#C8BEA8" stroke-width="1"/>
+      <path d="M50 73 Q54 78 50 82 Q46 78 50 73" fill="none" stroke="#C8BEA8" stroke-width="1"/>
+      <rect x="12" y="74" width="36" height="8"  fill="#EAE4D4" rx="1"/>
+
+      <!-- ── SHAFT with fluting ── -->
+      <rect x="16" y="82" width="28" height="752" fill="#EAE4D6"/>
+      <rect x="18" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="23" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="28" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="33" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="38" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="16" y="82" width="2" height="752" fill="#D8D0C0" opacity="0.4"/>
+      <rect x="42" y="82" width="2" height="752" fill="#D8D0C0" opacity="0.4"/>
+
+      <!-- ── BASE ── -->
+      <rect x="12" y="834" width="36" height="8"  fill="#DDD6C6" rx="1"/>
+      <rect x="8"  y="842" width="44" height="7"  fill="#D4CEBC" rx="1"/>
+      <rect x="4"  y="849" width="52" height="5"  fill="#CCC4B0" rx="1"/>
+
+      <!-- ══ FAIRY / ANGEL figure ══ -->
+      <path d="M30 100 Q10 88 6 100 Q12 114 30 108" fill="#D8F0D8" opacity="0.55"/>
+      <path d="M30 100 Q8 96 4 112 Q12 124 30 116" fill="#C8E8C8" opacity="0.38"/>
+      <path d="M30 100 Q50 88 54 100 Q48 114 30 108" fill="#D8F0D8" opacity="0.55"/>
+      <path d="M30 100 Q52 96 56 112 Q48 124 30 116" fill="#C8E8C8" opacity="0.38"/>
+      <path d="M30 104 Q18 96 10 100" stroke="#A0C0A0" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M30 108 Q16 104 8 112" stroke="#A0C0A0" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <path d="M30 104 Q42 96 50 100" stroke="#A0C0A0" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M30 108 Q44 104 52 112" stroke="#A0C0A0" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <path d="M26 116 Q24 130 22 142 Q28 146 30 146 Q32 146 38 142 Q36 130 34 116Z" fill="#D8F0E8" opacity="0.85"/>
+      <ellipse cx="30" cy="113" rx="5" ry="7" fill="#F0C8A0" opacity="0.9"/>
+      <circle cx="30" cy="103" r="6" fill="#F0C8A0" opacity="0.9"/>
+      <path d="M24 101 Q26 95 30 97 Q34 95 36 101" fill="#D4A060" opacity="0.75"/>
+      <ellipse cx="24" cy="102" rx="3" ry="2.5" fill="#C89050" opacity="0.6"/>
+      <ellipse cx="36" cy="102" rx="3" ry="2.5" fill="#C89050" opacity="0.6"/>
+      <line x1="26" y1="114" x2="16" y2="120" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <line x1="34" y1="114" x2="44" y2="118" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <!-- Holding flowers -->
+      <line x1="16" y1="120" x2="8" y2="112" stroke="#9EB89E" stroke-width="1" opacity="0.8"/>
+      <circle cx="8" cy="110" r="4" fill="#E88898" opacity="0.85"/>
+      <circle cx="8" cy="110" r="2" fill="#F0A0A8"/>
+      <line x1="28" y1="145" x2="26" y2="160" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+      <line x1="32" y1="145" x2="34" y2="160" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+
+      <!-- ══ GREEN RIBBON BOW ══ -->
+      <path d="M30 162 Q42 190 34 220 Q26 250 40 280 Q46 310 36 340 Q26 370 42 400 Q50 430 38 460 Q28 490 40 520 Q48 550 36 580 Q26 610 38 640 Q46 670 34 700 Q24 730 36 760" stroke="#B8D8B8" stroke-width="2.5" fill="none" opacity="0.65" stroke-linecap="round"/>
+      <path d="M30 162 Q20 155 16 160 Q14 168 22 168 Q26 168 30 162Z" fill="#B8D8B8" opacity="0.7"/>
+      <path d="M30 162 Q40 155 44 160 Q46 168 38 168 Q34 168 30 162Z" fill="#B8D8B8" opacity="0.7"/>
+      <circle cx="30" cy="163" r="3" fill="#90B890" opacity="0.8"/>
+      <path d="M28 166 Q22 178 20 192" stroke="#B8D8B8" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+      <path d="M32 166 Q38 178 40 192" stroke="#B8D8B8" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+
+      <!-- ══ CLIMBING VINES ══ -->
+      <path d="M32 170 Q46 210 38 250 Q30 290 46 330 Q54 362 40 402 Q30 435 46 475 Q54 508 40 548 Q30 580 46 620 Q54 652 40 690 Q32 720 44 758" stroke="#9EB89E" stroke-width="1.4" fill="none" opacity="0.7"/>
+      <path d="M28 185 Q14 225 22 265 Q30 300 14 340 Q6 372 20 412 Q30 445 14 485 Q6 518 20 558 Q30 590 14 630 Q6 662 20 700 Q28 730 16 768" stroke="#B0C8A0" stroke-width="1" fill="none" opacity="0.5"/>
+
+      <!-- Rose blooms -->
+      <circle cx="44" cy="222" r="7" fill="#E88080" opacity="0.85"/>
+      <circle cx="44" cy="222" r="4.5" fill="#F09898"/>
+      <circle cx="44" cy="222" r="2" fill="#C86060"/>
+      <ellipse cx="44" cy="212" rx="4" ry="6" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="52" cy="222" rx="6" ry="4" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="44" cy="232" rx="4" ry="6" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="36" cy="222" rx="6" ry="4" fill="#E88080" opacity="0.6"/>
+
+      <circle cx="16" cy="308" r="6" fill="#D4749E" opacity="0.85"/>
+      <circle cx="16" cy="308" r="3.5" fill="#E890B0"/>
+      <ellipse cx="16" cy="299" rx="3.5" ry="5" fill="#D4749E" opacity="0.6"/>
+      <ellipse cx="9"  cy="308" rx="5" ry="3" fill="#D4749E" opacity="0.6"/>
+      <ellipse cx="16" cy="317" rx="3.5" ry="5" fill="#D4749E" opacity="0.6"/>
+
+      <circle cx="46" cy="395" r="7" fill="#E88898" opacity="0.85"/>
+      <circle cx="46" cy="395" r="4.5" fill="#F0A0A8"/>
+      <circle cx="46" cy="395" r="2" fill="#C87080"/>
+      <ellipse cx="46" cy="385" rx="4" ry="6" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="54" cy="395" rx="6" ry="4" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="46" cy="405" rx="4" ry="6" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="38" cy="395" rx="6" ry="4" fill="#E88898" opacity="0.6"/>
+
+      <circle cx="14" cy="478" r="5.5" fill="#D47898" opacity="0.85"/>
+      <circle cx="14" cy="478" r="3.5" fill="#E890A8"/>
+      <ellipse cx="14" cy="470" rx="3" ry="5" fill="#D47898" opacity="0.6"/>
+      <ellipse cx="7"  cy="478" rx="5" ry="3" fill="#D47898" opacity="0.6"/>
+      <ellipse cx="14" cy="486" rx="3" ry="5" fill="#D47898" opacity="0.6"/>
+
+      <circle cx="44" cy="558" r="6.5" fill="#E88080" opacity="0.85"/>
+      <circle cx="44" cy="558" r="4" fill="#F09898"/>
+      <ellipse cx="44" cy="549" rx="3.5" ry="5.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="51" cy="558" rx="5.5" ry="3.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="44" cy="567" rx="3.5" ry="5.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="37" cy="558" rx="5.5" ry="3.5" fill="#E88080" opacity="0.6"/>
+
+      <circle cx="16" cy="645" r="6" fill="#D4849E" opacity="0.8"/>
+      <circle cx="16" cy="645" r="3.8" fill="#E898B0"/>
+      <ellipse cx="16" cy="637" rx="3.5" ry="5" fill="#D4849E" opacity="0.6"/>
+      <ellipse cx="9"  cy="645" rx="5" ry="3.5" fill="#D4849E" opacity="0.6"/>
+      <ellipse cx="16" cy="653" rx="3.5" ry="5" fill="#D4849E" opacity="0.6"/>
+
+      <circle cx="42" cy="735" r="6" fill="#E88898" opacity="0.8"/>
+      <circle cx="42" cy="735" r="3.5" fill="#F0A0A8"/>
+      <ellipse cx="42" cy="727" rx="3.5" ry="5" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="49" cy="735" rx="5" ry="3" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="42" cy="743" rx="3.5" ry="5" fill="#E88898" opacity="0.6"/>
+
+      <!-- Small buds -->
+      <ellipse cx="38" cy="192" rx="2.5" ry="4" fill="#F0B0B8" opacity="0.8"/>
+      <ellipse cx="22" cy="268" rx="2"   ry="3" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="40" cy="358" rx="2.5" ry="4" fill="#F0B0C0" opacity="0.8"/>
+      <ellipse cx="18" cy="438" rx="2"   ry="3" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="40" cy="518" rx="2.5" ry="4" fill="#F0B0B8" opacity="0.8"/>
+      <ellipse cx="24" cy="598" rx="2"   ry="3.5" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="38" cy="692" rx="2.5" ry="4" fill="#F0B0C0" opacity="0.8"/>
+
+      <!-- Small white flowers -->
+      <circle cx="24" cy="238" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="24" cy="238" r="1.8" fill="#E8D5A3"/>
+      <circle cx="48" cy="352" r="3.5" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="48" cy="352" r="1.5" fill="#E8D5A3"/>
+      <circle cx="22" cy="525" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="22" cy="525" r="1.8" fill="#E8D5A3"/>
+      <circle cx="46" cy="676" r="3.5" fill="#FFF8F0" opacity="0.85"/>
+      <circle cx="46" cy="676" r="1.5" fill="#E8D5A3"/>
+
+      <!-- Leaves -->
+      <path d="M50 208 Q60 202 58 214 Q48 220 50 208" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M36 232 Q26 225 28 238 Q38 244 36 232" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M32 282 Q42 276 40 288 Q30 294 32 282" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M18 325 Q8 318 6 330 Q16 338 18 325" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M50 375 Q60 368 58 380 Q48 388 50 375" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M34 412 Q24 405 22 417 Q32 425 34 412" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M50 458 Q60 452 58 464 Q48 470 50 458" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M16 502 Q6 495 4 507 Q14 515 16 502" fill="#6B8F6E" opacity="0.6"/>
+      <path d="M50 545 Q60 538 58 550 Q48 558 50 545" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M36 582 Q46 576 44 588 Q34 594 36 582" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M16 628 Q6 622 4 634 Q14 640 16 628" fill="#7A9E7E" opacity="0.65"/>
+      <path d="M50 665 Q60 658 58 670 Q48 678 50 665" fill="#6B8F6E" opacity="0.7"/>
+      <path d="M34 717 Q24 710 22 722 Q32 730 34 717" fill="#7A9E7E" opacity="0.65"/>
+      <path d="M50 752 Q60 746 58 758 Q48 764 50 752" fill="#6B8F6E" opacity="0.6"/>
+
+      <!-- Small hearts -->
+      <path d="M6 198 C6 195 9 195 9 198 C9 195 12 195 12 198 C12 202 9 205 9 205 C9 205 6 202 6 198Z" fill="#E8A0B0" opacity="0.5"/>
+      <path d="M54 338 C54 335 57 335 57 338 C57 335 60 335 60 338 C60 342 57 345 57 345 C57 345 54 342 54 338Z" fill="#E8A0B0" opacity="0.4"/>
+      <path d="M6 508 C6 505 9 505 9 508 C9 505 12 505 12 508 C12 512 9 515 9 515 C9 515 6 512 6 508Z" fill="#E8A0B0" opacity="0.45"/>
     </svg>
 
     <!-- Top flowers -->
@@ -981,7 +1465,7 @@
 
       <div class="timeline-item left">
         <div class="tl-content tl-left">
-          <div class="tl-time">18:30</div>
+          <div class="tl-time">19:00</div>
           <div class="tl-label">Başlangıç</div>
         </div>
         <div class="tl-icon">
@@ -994,15 +1478,14 @@
             <path d="M18 16 Q20 11 22 16" fill="none" stroke="#C9A84C" stroke-width="1"/>
           </svg>
         </div>
-        <div class="tl-content tl-empty"></div>
+        <div class="tl-empty"></div>
       </div>
 
       <div class="timeline-item right">
-        <div class="tl-content tl-empty"></div>
+        <div class="tl-empty"></div>
         <div class="tl-icon">
           <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
             <circle cx="20" cy="20" r="18" fill="none" stroke="#D4C4A0" stroke-width="0.8"/>
-            <!-- Wedding rings interlinked -->
             <circle cx="16" cy="20" r="6" fill="none" stroke="#8B7355" stroke-width="1.3"/>
             <circle cx="24" cy="20" r="6" fill="none" stroke="#8B7355" stroke-width="1.3"/>
             <path d="M19.5 17 Q20 16 20.5 17" stroke="#C9A84C" stroke-width="1" fill="none"/>
@@ -1010,14 +1493,14 @@
           </svg>
         </div>
         <div class="tl-content tl-right">
-          <div class="tl-time">19:00</div>
+          <div class="tl-time">20:00</div>
           <div class="tl-label">Nikah Töreni</div>
         </div>
       </div>
 
       <div class="timeline-item left">
         <div class="tl-content tl-left">
-          <div class="tl-time">19:30</div>
+          <div class="tl-time">20:30</div>
           <div class="tl-label">Yemek</div>
         </div>
         <div class="tl-icon">
@@ -1030,11 +1513,11 @@
             <path d="M15 15 Q20 18 25 15" fill="none" stroke="#C9A84C" stroke-width="0.8"/>
           </svg>
         </div>
-        <div class="tl-content tl-empty"></div>
+        <div class="tl-empty"></div>
       </div>
 
       <div class="timeline-item right">
-        <div class="tl-content tl-empty"></div>
+        <div class="tl-empty"></div>
         <div class="tl-icon">
           <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
             <circle cx="20" cy="20" r="18" fill="none" stroke="#D4C4A0" stroke-width="0.8"/>
@@ -1049,7 +1532,7 @@
           </svg>
         </div>
         <div class="tl-content tl-right">
-          <div class="tl-time">20:30</div>
+          <div class="tl-time">21:00</div>
           <div class="tl-label">Eglence</div>
         </div>
       </div>
@@ -1066,41 +1549,325 @@
 
     <!-- Left column -->
     <svg class="floral-left" viewBox="0 0 60 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="0" width="40" height="10" fill="#DDD6C6" rx="1"/>
-      <rect x="14" y="10" width="32" height="6" fill="#E8E2D4" rx="1"/>
-      <rect x="18" y="16" width="24" height="840" fill="#E8E3D8"/>
-      <rect x="20" y="16" width="4" height="840" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="26" y="16" width="4" height="840" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="32" y="16" width="4" height="840" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="12" y="856" width="36" height="8" fill="#DDD6C6" rx="1"/>
-      <rect x="8" y="864" width="44" height="6" fill="#D4CEBC" rx="1"/>
-      <path d="M30 30 Q22 150 28 270 Q34 390 26 510" stroke="#B8C8A0" stroke-width="1.2" fill="none" opacity="0.6"/>
-      <circle cx="28" cy="150" r="5" fill="#E8A0A0" opacity="0.8"/>
-      <circle cx="26" cy="330" r="6" fill="#D4849E" opacity="0.75"/>
-      <circle cx="28" cy="500" r="5" fill="#E8A0A0" opacity="0.8"/>
-      <path d="M25 165 Q14 160 16 170 Q24 176 25 165" fill="#7A9E7E" opacity="0.6"/>
-      <path d="M27 345 Q16 340 18 350 Q26 356 27 345" fill="#6B8F6E" opacity="0.55"/>
+      <!-- ── IONIC CAPITAL ── -->
+      <rect x="6"  y="62" width="48" height="6"  fill="#DDD6C6" rx="1"/>
+      <rect x="10" y="68" width="40" height="5"  fill="#E4DECE" rx="1"/>
+      <!-- Volute scrolls -->
+      <path d="M10 73 Q6 78 10 82 Q14 78 10 73" fill="none" stroke="#C8BEA8" stroke-width="1"/>
+      <path d="M50 73 Q54 78 50 82 Q46 78 50 73" fill="none" stroke="#C8BEA8" stroke-width="1"/>
+      <rect x="12" y="74" width="36" height="8"  fill="#EAE4D4" rx="1"/>
+
+      <!-- ── SHAFT with fluting ── -->
+      <rect x="16" y="82" width="28" height="752" fill="#EAE4D6"/>
+      <!-- Fluting grooves -->
+      <rect x="18" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="23" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="28" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="33" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="38" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <!-- Shadow edges -->
+      <rect x="16" y="82" width="2" height="752" fill="#D8D0C0" opacity="0.4"/>
+      <rect x="42" y="82" width="2" height="752" fill="#D8D0C0" opacity="0.4"/>
+
+      <!-- ── BASE ── -->
+      <rect x="12" y="834" width="36" height="8"  fill="#DDD6C6" rx="1"/>
+      <rect x="8"  y="842" width="44" height="7"  fill="#D4CEBC" rx="1"/>
+      <rect x="4"  y="849" width="52" height="5"  fill="#CCC4B0" rx="1"/>
+
+      <!-- ══ FAIRY / ANGEL figure at top ══ -->
+      <!-- Wings — left -->
+      <path d="M30 100 Q10 88 6 100 Q12 114 30 108" fill="#F0D8F0" opacity="0.55"/>
+      <path d="M30 100 Q8 96 4 112 Q12 124 30 116" fill="#E8C8E8" opacity="0.38"/>
+      <!-- Wings — right -->
+      <path d="M30 100 Q50 88 54 100 Q48 114 30 108" fill="#F0D8F0" opacity="0.55"/>
+      <path d="M30 100 Q52 96 56 112 Q48 124 30 116" fill="#E8C8E8" opacity="0.38"/>
+      <!-- Wing veins -->
+      <path d="M30 104 Q18 96 10 100" stroke="#D0A0D0" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M30 108 Q16 104 8 112" stroke="#D0A0D0" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <path d="M30 104 Q42 96 50 100" stroke="#D0A0D0" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M30 108 Q44 104 52 112" stroke="#D0A0D0" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <!-- Body/dress -->
+      <path d="M26 116 Q24 130 22 142 Q28 146 30 146 Q32 146 38 142 Q36 130 34 116Z" fill="#F5D8E8" opacity="0.85"/>
+      <!-- Torso -->
+      <ellipse cx="30" cy="113" rx="5" ry="7" fill="#F0C8A0" opacity="0.9"/>
+      <!-- Head -->
+      <circle cx="30" cy="103" r="6" fill="#F0C8A0" opacity="0.9"/>
+      <!-- Curly hair -->
+      <path d="M24 101 Q26 95 30 97 Q34 95 36 101" fill="#D4A060" opacity="0.75"/>
+      <ellipse cx="24" cy="102" rx="3" ry="2.5" fill="#C89050" opacity="0.6"/>
+      <ellipse cx="36" cy="102" rx="3" ry="2.5" fill="#C89050" opacity="0.6"/>
+      <!-- Arms -->
+      <line x1="26" y1="114" x2="16" y2="122" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <line x1="34" y1="114" x2="44" y2="118" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <!-- Wand with star -->
+      <line x1="44" y1="118" x2="52" y2="108" stroke="#C9A84C" stroke-width="1" opacity="0.85"/>
+      <path d="M52 108 L53 104 L54 108 L58 109 L54 110 L53 114 L52 110 L48 109 Z" fill="#E8D5A3" opacity="0.8" transform="scale(0.8) translate(14,10)"/>
+      <!-- Legs -->
+      <line x1="28" y1="145" x2="26" y2="160" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+      <line x1="32" y1="145" x2="34" y2="160" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+
+      <!-- ══ PINK RIBBON BOW ══ -->
+      <!-- Ribbon wrapping down column -->
+      <path d="M30 162 Q18 190 26 220 Q34 250 20 280 Q14 310 24 340 Q34 370 18 400 Q10 430 22 460 Q32 490 20 520 Q12 550 24 580 Q34 610 22 640 Q14 670 26 700 Q36 730 24 760" stroke="#F0B8C8" stroke-width="2.5" fill="none" opacity="0.65" stroke-linecap="round"/>
+      <!-- Bow knot at top -->
+      <path d="M30 162 Q20 155 16 160 Q14 168 22 168 Q26 168 30 162Z" fill="#F0B8C8" opacity="0.7"/>
+      <path d="M30 162 Q40 155 44 160 Q46 168 38 168 Q34 168 30 162Z" fill="#F0B8C8" opacity="0.7"/>
+      <circle cx="30" cy="163" r="3" fill="#E8A0B8" opacity="0.8"/>
+      <!-- Ribbon tails -->
+      <path d="M28 166 Q22 178 20 192" stroke="#F0B8C8" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+      <path d="M32 166 Q38 178 40 192" stroke="#F0B8C8" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+
+      <!-- ══ CLIMBING ROSES & VINES ══ -->
+      <!-- Main vine -->
+      <path d="M28 170 Q14 210 22 250 Q30 290 14 330 Q6 360 18 400 Q28 432 14 470 Q6 500 18 540 Q28 572 14 610 Q6 640 20 680 Q30 710 18 750" stroke="#9EB89E" stroke-width="1.4" fill="none" opacity="0.7"/>
+      <!-- Secondary vine -->
+      <path d="M32 185 Q46 225 38 265 Q30 300 46 340 Q54 372 40 412 Q30 445 46 485 Q54 518 40 558 Q30 590 46 630 Q54 662 40 700 Q32 730 44 768" stroke="#B0C8A0" stroke-width="1" fill="none" opacity="0.5"/>
+
+      <!-- Rose blooms - large -->
+      <!-- Rose 1 ~y220 -->
+      <circle cx="16" cy="225" r="7" fill="#E88080" opacity="0.85"/>
+      <circle cx="16" cy="225" r="4.5" fill="#F09898"/>
+      <circle cx="16" cy="225" r="2" fill="#C86060"/>
+      <ellipse cx="16" cy="215" rx="4" ry="6" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="24" cy="225" rx="6" ry="4" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="16" cy="235" rx="4" ry="6" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="8"  cy="225" rx="6" ry="4" fill="#E88080" opacity="0.6"/>
+
+      <!-- Rose 2 ~y310 -->
+      <circle cx="40" cy="312" r="6" fill="#D4749E" opacity="0.85"/>
+      <circle cx="40" cy="312" r="3.5" fill="#E890B0"/>
+      <circle cx="40" cy="312" r="1.8" fill="#B85888"/>
+      <ellipse cx="40" cy="303" rx="3.5" ry="5" fill="#D4749E" opacity="0.6"/>
+      <ellipse cx="47" cy="312" rx="5" ry="3" fill="#D4749E" opacity="0.6"/>
+      <ellipse cx="40" cy="321" rx="3.5" ry="5" fill="#D4749E" opacity="0.6"/>
+
+      <!-- Rose 3 ~y400 -->
+      <circle cx="14" cy="398" r="7" fill="#E88898" opacity="0.85"/>
+      <circle cx="14" cy="398" r="4.5" fill="#F0A0A8"/>
+      <circle cx="14" cy="398" r="2" fill="#C87080"/>
+      <ellipse cx="14" cy="388" rx="4" ry="6" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="22" cy="398" rx="6" ry="4" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="14" cy="408" rx="4" ry="6" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="6"  cy="398" rx="6" ry="4" fill="#E88898" opacity="0.6"/>
+
+      <!-- Rose 4 ~y480 -->
+      <circle cx="44" cy="482" r="5.5" fill="#D47898" opacity="0.85"/>
+      <circle cx="44" cy="482" r="3.5" fill="#E890A8"/>
+      <ellipse cx="44" cy="474" rx="3" ry="5" fill="#D47898" opacity="0.6"/>
+      <ellipse cx="51" cy="482" rx="5" ry="3" fill="#D47898" opacity="0.6"/>
+      <ellipse cx="44" cy="490" rx="3" ry="5" fill="#D47898" opacity="0.6"/>
+
+      <!-- Rose 5 ~y560 -->
+      <circle cx="16" cy="562" r="6.5" fill="#E88080" opacity="0.85"/>
+      <circle cx="16" cy="562" r="4" fill="#F09898"/>
+      <circle cx="16" cy="562" r="2" fill="#C86060"/>
+      <ellipse cx="16" cy="553" rx="3.5" ry="5.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="23" cy="562" rx="5.5" ry="3.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="16" cy="571" rx="3.5" ry="5.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="9"  cy="562" rx="5.5" ry="3.5" fill="#E88080" opacity="0.6"/>
+
+      <!-- Rose 6 ~y650 -->
+      <circle cx="40" cy="648" r="6" fill="#D4849E" opacity="0.8"/>
+      <circle cx="40" cy="648" r="3.8" fill="#E898B0"/>
+      <ellipse cx="40" cy="640" rx="3.5" ry="5" fill="#D4849E" opacity="0.6"/>
+      <ellipse cx="47" cy="648" rx="5" ry="3.5" fill="#D4849E" opacity="0.6"/>
+      <ellipse cx="40" cy="656" rx="3.5" ry="5" fill="#D4849E" opacity="0.6"/>
+
+      <!-- Rose 7 ~y740 -->
+      <circle cx="18" cy="738" r="6" fill="#E88898" opacity="0.8"/>
+      <circle cx="18" cy="738" r="3.5" fill="#F0A0A8"/>
+      <ellipse cx="18" cy="730" rx="3.5" ry="5" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="25" cy="738" rx="5" ry="3" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="18" cy="746" rx="3.5" ry="5" fill="#E88898" opacity="0.6"/>
+
+      <!-- Small buds along vines -->
+      <ellipse cx="22" cy="195" rx="2.5" ry="4" fill="#F0B0B8" opacity="0.8"/>
+      <ellipse cx="38" cy="270" rx="2"   ry="3" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="20" cy="360" rx="2.5" ry="4" fill="#F0B0C0" opacity="0.8"/>
+      <ellipse cx="42" cy="440" rx="2"   ry="3" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="20" cy="520" rx="2.5" ry="4" fill="#F0B0B8" opacity="0.8"/>
+      <ellipse cx="36" cy="600" rx="2"   ry="3.5" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="22" cy="695" rx="2.5" ry="4" fill="#F0B0C0" opacity="0.8"/>
+
+      <!-- Small white flowers scattered -->
+      <circle cx="36" cy="242" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="36" cy="242" r="1.8" fill="#E8D5A3"/>
+      <circle cx="12" cy="356" r="3.5" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="12" cy="356" r="1.5" fill="#E8D5A3"/>
+      <circle cx="38" cy="528" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="38" cy="528" r="1.8" fill="#E8D5A3"/>
+      <circle cx="14" cy="680" r="3.5" fill="#FFF8F0" opacity="0.85"/>
+      <circle cx="14" cy="680" r="1.5" fill="#E8D5A3"/>
+
+      <!-- Leaves -->
+      <path d="M10 210 Q0 205 2 216 Q12 222 10 210" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M24 235 Q34 228 32 240 Q22 246 24 235" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M28 285 Q18 278 16 290 Q26 298 28 285" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M42 328 Q52 322 50 334 Q40 340 42 328" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M10 378 Q0 372 2 384 Q12 390 10 378" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M26 415 Q36 408 34 420 Q24 426 26 415" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M10 460 Q0 454 2 466 Q12 472 10 460" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M44 505 Q54 498 52 510 Q42 516 44 505" fill="#6B8F6E" opacity="0.6"/>
+      <path d="M10 548 Q0 542 2 554 Q12 560 10 548" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M24 585 Q14 578 12 590 Q22 598 24 585" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M44 630 Q54 624 52 636 Q42 642 44 630" fill="#7A9E7E" opacity="0.65"/>
+      <path d="M10 668 Q0 662 2 674 Q12 680 10 668" fill="#6B8F6E" opacity="0.7"/>
+      <path d="M26 720 Q36 714 34 726 Q24 732 26 720" fill="#7A9E7E" opacity="0.65"/>
+      <path d="M10 755 Q0 748 2 760 Q12 766 10 755" fill="#6B8F6E" opacity="0.6"/>
+
+      <!-- Small hearts -->
+      <path d="M46 200 C46 197 49 197 49 200 C49 197 52 197 52 200 C52 204 49 207 49 207 C49 207 46 204 46 200Z" fill="#E8A0B0" opacity="0.5"/>
+      <path d="M4 340 C4 337 7 337 7 340 C7 337 10 337 10 340 C10 344 7 347 7 347 C7 347 4 344 4 340Z" fill="#E8A0B0" opacity="0.4"/>
+      <path d="M48 510 C48 507 51 507 51 510 C51 507 54 507 54 510 C54 514 51 517 51 517 C51 517 48 514 48 510Z" fill="#E8A0B0" opacity="0.45"/>
     </svg>
 
     <!-- Right column -->
     <svg class="floral-right" viewBox="0 0 60 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="0" width="40" height="10" fill="#DDD6C6" rx="1"/>
-      <rect x="14" y="10" width="32" height="6" fill="#E8E2D4" rx="1"/>
-      <rect x="18" y="16" width="24" height="840" fill="#E8E3D8"/>
-      <rect x="20" y="16" width="4" height="840" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="26" y="16" width="4" height="840" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="32" y="16" width="4" height="840" fill="#F0EBE0" opacity="0.7"/>
-      <rect x="12" y="856" width="36" height="8" fill="#DDD6C6" rx="1"/>
-      <rect x="8" y="864" width="44" height="6" fill="#D4CEBC" rx="1"/>
-      <path d="M30 30 Q38 150 32 270 Q26 390 34 510" stroke="#B8C8A0" stroke-width="1.2" fill="none" opacity="0.6"/>
-      <circle cx="32" cy="140" r="5" fill="#F5F0E8" opacity="0.9"/>
-      <circle cx="32" cy="140" r="2.5" fill="#E8D5A3"/>
-      <circle cx="34" cy="310" r="5.5" fill="#F0C8D0" opacity="0.8"/>
-      <circle cx="34" cy="310" r="3" fill="#E8A8B8"/>
-      <circle cx="32" cy="490" r="5" fill="#F5F0E8" opacity="0.9"/>
-      <circle cx="32" cy="490" r="2.5" fill="#E8D5A3"/>
-      <path d="M35 155 Q46 150 44 160 Q36 166 35 155" fill="#7A9E7E" opacity="0.6"/>
-      <path d="M33 325 Q44 320 42 330 Q34 336 33 325" fill="#6B8F6E" opacity="0.55"/>
+      <!-- ── IONIC CAPITAL ── -->
+      <rect x="6"  y="62" width="48" height="6"  fill="#DDD6C6" rx="1"/>
+      <rect x="10" y="68" width="40" height="5"  fill="#E4DECE" rx="1"/>
+      <path d="M10 73 Q6 78 10 82 Q14 78 10 73" fill="none" stroke="#C8BEA8" stroke-width="1"/>
+      <path d="M50 73 Q54 78 50 82 Q46 78 50 73" fill="none" stroke="#C8BEA8" stroke-width="1"/>
+      <rect x="12" y="74" width="36" height="8"  fill="#EAE4D4" rx="1"/>
+
+      <!-- ── SHAFT with fluting ── -->
+      <rect x="16" y="82" width="28" height="752" fill="#EAE4D6"/>
+      <rect x="18" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="23" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="28" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="33" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="38" y="82" width="3" height="752" fill="#F4EEE4" opacity="0.8"/>
+      <rect x="16" y="82" width="2" height="752" fill="#D8D0C0" opacity="0.4"/>
+      <rect x="42" y="82" width="2" height="752" fill="#D8D0C0" opacity="0.4"/>
+
+      <!-- ── BASE ── -->
+      <rect x="12" y="834" width="36" height="8"  fill="#DDD6C6" rx="1"/>
+      <rect x="8"  y="842" width="44" height="7"  fill="#D4CEBC" rx="1"/>
+      <rect x="4"  y="849" width="52" height="5"  fill="#CCC4B0" rx="1"/>
+
+      <!-- ══ FAIRY / ANGEL figure ══ -->
+      <path d="M30 100 Q10 88 6 100 Q12 114 30 108" fill="#D8F0D8" opacity="0.55"/>
+      <path d="M30 100 Q8 96 4 112 Q12 124 30 116" fill="#C8E8C8" opacity="0.38"/>
+      <path d="M30 100 Q50 88 54 100 Q48 114 30 108" fill="#D8F0D8" opacity="0.55"/>
+      <path d="M30 100 Q52 96 56 112 Q48 124 30 116" fill="#C8E8C8" opacity="0.38"/>
+      <path d="M30 104 Q18 96 10 100" stroke="#A0C0A0" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M30 108 Q16 104 8 112" stroke="#A0C0A0" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <path d="M30 104 Q42 96 50 100" stroke="#A0C0A0" stroke-width="0.5" fill="none" opacity="0.5"/>
+      <path d="M30 108 Q44 104 52 112" stroke="#A0C0A0" stroke-width="0.5" fill="none" opacity="0.4"/>
+      <path d="M26 116 Q24 130 22 142 Q28 146 30 146 Q32 146 38 142 Q36 130 34 116Z" fill="#D8F0E8" opacity="0.85"/>
+      <ellipse cx="30" cy="113" rx="5" ry="7" fill="#F0C8A0" opacity="0.9"/>
+      <circle cx="30" cy="103" r="6" fill="#F0C8A0" opacity="0.9"/>
+      <path d="M24 101 Q26 95 30 97 Q34 95 36 101" fill="#D4A060" opacity="0.75"/>
+      <ellipse cx="24" cy="102" rx="3" ry="2.5" fill="#C89050" opacity="0.6"/>
+      <ellipse cx="36" cy="102" rx="3" ry="2.5" fill="#C89050" opacity="0.6"/>
+      <line x1="26" y1="114" x2="16" y2="120" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <line x1="34" y1="114" x2="44" y2="118" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <!-- Holding flowers -->
+      <line x1="16" y1="120" x2="8" y2="112" stroke="#9EB89E" stroke-width="1" opacity="0.8"/>
+      <circle cx="8" cy="110" r="4" fill="#E88898" opacity="0.85"/>
+      <circle cx="8" cy="110" r="2" fill="#F0A0A8"/>
+      <line x1="28" y1="145" x2="26" y2="160" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+      <line x1="32" y1="145" x2="34" y2="160" stroke="#F0C8A0" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+
+      <!-- ══ GREEN RIBBON BOW ══ -->
+      <path d="M30 162 Q42 190 34 220 Q26 250 40 280 Q46 310 36 340 Q26 370 42 400 Q50 430 38 460 Q28 490 40 520 Q48 550 36 580 Q26 610 38 640 Q46 670 34 700 Q24 730 36 760" stroke="#B8D8B8" stroke-width="2.5" fill="none" opacity="0.65" stroke-linecap="round"/>
+      <path d="M30 162 Q20 155 16 160 Q14 168 22 168 Q26 168 30 162Z" fill="#B8D8B8" opacity="0.7"/>
+      <path d="M30 162 Q40 155 44 160 Q46 168 38 168 Q34 168 30 162Z" fill="#B8D8B8" opacity="0.7"/>
+      <circle cx="30" cy="163" r="3" fill="#90B890" opacity="0.8"/>
+      <path d="M28 166 Q22 178 20 192" stroke="#B8D8B8" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+      <path d="M32 166 Q38 178 40 192" stroke="#B8D8B8" stroke-width="1.5" fill="none" opacity="0.6" stroke-linecap="round"/>
+
+      <!-- ══ CLIMBING VINES ══ -->
+      <path d="M32 170 Q46 210 38 250 Q30 290 46 330 Q54 362 40 402 Q30 435 46 475 Q54 508 40 548 Q30 580 46 620 Q54 652 40 690 Q32 720 44 758" stroke="#9EB89E" stroke-width="1.4" fill="none" opacity="0.7"/>
+      <path d="M28 185 Q14 225 22 265 Q30 300 14 340 Q6 372 20 412 Q30 445 14 485 Q6 518 20 558 Q30 590 14 630 Q6 662 20 700 Q28 730 16 768" stroke="#B0C8A0" stroke-width="1" fill="none" opacity="0.5"/>
+
+      <!-- Rose blooms -->
+      <circle cx="44" cy="222" r="7" fill="#E88080" opacity="0.85"/>
+      <circle cx="44" cy="222" r="4.5" fill="#F09898"/>
+      <circle cx="44" cy="222" r="2" fill="#C86060"/>
+      <ellipse cx="44" cy="212" rx="4" ry="6" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="52" cy="222" rx="6" ry="4" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="44" cy="232" rx="4" ry="6" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="36" cy="222" rx="6" ry="4" fill="#E88080" opacity="0.6"/>
+
+      <circle cx="16" cy="308" r="6" fill="#D4749E" opacity="0.85"/>
+      <circle cx="16" cy="308" r="3.5" fill="#E890B0"/>
+      <ellipse cx="16" cy="299" rx="3.5" ry="5" fill="#D4749E" opacity="0.6"/>
+      <ellipse cx="9"  cy="308" rx="5" ry="3" fill="#D4749E" opacity="0.6"/>
+      <ellipse cx="16" cy="317" rx="3.5" ry="5" fill="#D4749E" opacity="0.6"/>
+
+      <circle cx="46" cy="395" r="7" fill="#E88898" opacity="0.85"/>
+      <circle cx="46" cy="395" r="4.5" fill="#F0A0A8"/>
+      <circle cx="46" cy="395" r="2" fill="#C87080"/>
+      <ellipse cx="46" cy="385" rx="4" ry="6" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="54" cy="395" rx="6" ry="4" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="46" cy="405" rx="4" ry="6" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="38" cy="395" rx="6" ry="4" fill="#E88898" opacity="0.6"/>
+
+      <circle cx="14" cy="478" r="5.5" fill="#D47898" opacity="0.85"/>
+      <circle cx="14" cy="478" r="3.5" fill="#E890A8"/>
+      <ellipse cx="14" cy="470" rx="3" ry="5" fill="#D47898" opacity="0.6"/>
+      <ellipse cx="7"  cy="478" rx="5" ry="3" fill="#D47898" opacity="0.6"/>
+      <ellipse cx="14" cy="486" rx="3" ry="5" fill="#D47898" opacity="0.6"/>
+
+      <circle cx="44" cy="558" r="6.5" fill="#E88080" opacity="0.85"/>
+      <circle cx="44" cy="558" r="4" fill="#F09898"/>
+      <ellipse cx="44" cy="549" rx="3.5" ry="5.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="51" cy="558" rx="5.5" ry="3.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="44" cy="567" rx="3.5" ry="5.5" fill="#E88080" opacity="0.6"/>
+      <ellipse cx="37" cy="558" rx="5.5" ry="3.5" fill="#E88080" opacity="0.6"/>
+
+      <circle cx="16" cy="645" r="6" fill="#D4849E" opacity="0.8"/>
+      <circle cx="16" cy="645" r="3.8" fill="#E898B0"/>
+      <ellipse cx="16" cy="637" rx="3.5" ry="5" fill="#D4849E" opacity="0.6"/>
+      <ellipse cx="9"  cy="645" rx="5" ry="3.5" fill="#D4849E" opacity="0.6"/>
+      <ellipse cx="16" cy="653" rx="3.5" ry="5" fill="#D4849E" opacity="0.6"/>
+
+      <circle cx="42" cy="735" r="6" fill="#E88898" opacity="0.8"/>
+      <circle cx="42" cy="735" r="3.5" fill="#F0A0A8"/>
+      <ellipse cx="42" cy="727" rx="3.5" ry="5" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="49" cy="735" rx="5" ry="3" fill="#E88898" opacity="0.6"/>
+      <ellipse cx="42" cy="743" rx="3.5" ry="5" fill="#E88898" opacity="0.6"/>
+
+      <!-- Small buds -->
+      <ellipse cx="38" cy="192" rx="2.5" ry="4" fill="#F0B0B8" opacity="0.8"/>
+      <ellipse cx="22" cy="268" rx="2"   ry="3" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="40" cy="358" rx="2.5" ry="4" fill="#F0B0C0" opacity="0.8"/>
+      <ellipse cx="18" cy="438" rx="2"   ry="3" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="40" cy="518" rx="2.5" ry="4" fill="#F0B0B8" opacity="0.8"/>
+      <ellipse cx="24" cy="598" rx="2"   ry="3.5" fill="#E898A8" opacity="0.75"/>
+      <ellipse cx="38" cy="692" rx="2.5" ry="4" fill="#F0B0C0" opacity="0.8"/>
+
+      <!-- Small white flowers -->
+      <circle cx="24" cy="238" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="24" cy="238" r="1.8" fill="#E8D5A3"/>
+      <circle cx="48" cy="352" r="3.5" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="48" cy="352" r="1.5" fill="#E8D5A3"/>
+      <circle cx="22" cy="525" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="22" cy="525" r="1.8" fill="#E8D5A3"/>
+      <circle cx="46" cy="676" r="3.5" fill="#FFF8F0" opacity="0.85"/>
+      <circle cx="46" cy="676" r="1.5" fill="#E8D5A3"/>
+
+      <!-- Leaves -->
+      <path d="M50 208 Q60 202 58 214 Q48 220 50 208" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M36 232 Q26 225 28 238 Q38 244 36 232" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M32 282 Q42 276 40 288 Q30 294 32 282" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M18 325 Q8 318 6 330 Q16 338 18 325" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M50 375 Q60 368 58 380 Q48 388 50 375" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M34 412 Q24 405 22 417 Q32 425 34 412" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M50 458 Q60 452 58 464 Q48 470 50 458" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M16 502 Q6 495 4 507 Q14 515 16 502" fill="#6B8F6E" opacity="0.6"/>
+      <path d="M50 545 Q60 538 58 550 Q48 558 50 545" fill="#7A9E7E" opacity="0.7"/>
+      <path d="M36 582 Q46 576 44 588 Q34 594 36 582" fill="#6B8F6E" opacity="0.65"/>
+      <path d="M16 628 Q6 622 4 634 Q14 640 16 628" fill="#7A9E7E" opacity="0.65"/>
+      <path d="M50 665 Q60 658 58 670 Q48 678 50 665" fill="#6B8F6E" opacity="0.7"/>
+      <path d="M34 717 Q24 710 22 722 Q32 730 34 717" fill="#7A9E7E" opacity="0.65"/>
+      <path d="M50 752 Q60 746 58 758 Q48 764 50 752" fill="#6B8F6E" opacity="0.6"/>
+
+      <!-- Small hearts -->
+      <path d="M6 198 C6 195 9 195 9 198 C9 195 12 195 12 198 C12 202 9 205 9 205 C9 205 6 202 6 198Z" fill="#E8A0B0" opacity="0.5"/>
+      <path d="M54 338 C54 335 57 335 57 338 C57 335 60 335 60 338 C60 342 57 345 57 345 C57 345 54 342 54 338Z" fill="#E8A0B0" opacity="0.4"/>
+      <path d="M6 508 C6 505 9 505 9 508 C9 505 12 505 12 508 C12 512 9 515 9 515 C9 515 6 512 6 508Z" fill="#E8A0B0" opacity="0.45"/>
     </svg>
 
     <svg class="section-flowers-top" viewBox="0 0 480 100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
@@ -1167,9 +1934,9 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-monogram">A & G</div>
+    <p class="footer-thanks">Teşekkür ederiz</p>
     <div class="divider-gold"></div>
-    <p class="footer-text">23 Mayıs 2026</p>
+    <div class="footer-monogram">A &amp; G</div>
   </footer>
 
 </div><!-- end #invitation -->
